@@ -329,7 +329,7 @@ return [
                 ],
                 [
                     'text' => 'Registrar Usuario',
-                    'url'  => '#',
+                    'url'  => 'resources/views/auth/register',
                 ]
             ]
         ],
