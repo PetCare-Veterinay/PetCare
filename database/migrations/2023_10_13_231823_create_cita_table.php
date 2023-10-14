@@ -22,7 +22,7 @@ class CreateCitaTable extends Migration
             $table->unsignedBigInteger('Diagnostico_idDiagnostico');
             $table->timestamps();
             
-            $table->foreign('Usuarios_idUsuario')->references('idUsuario')->on('users');
+            $table->foreign('Usuarios_idUsuario')->references('id')->on('users');
             $table->foreign('Diagnostico_idDiagnostico')->references('idDiagnostico')->on('diagnostico');
 
         });
