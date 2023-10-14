@@ -1,0 +1,7 @@
+.button-rectangle {
+   border: 1px solid #ccc; /* Grosor y color del borde */
+   padding: 10px; /* Espaciado interno para que se vea como un botón */
+   background-color: #fff; /* Fondo blanco */
+   text-align: center; /* Alinear el texto al centro */
+}
+

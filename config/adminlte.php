@@ -303,11 +303,7 @@ return [
 
         // Sidebar items:
 
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+
         ['header' => 'Configuraciones'],
         [
             'text' => 'Home',
@@ -317,7 +313,7 @@ return [
                     'text' => 'Home',
                     'url'  => '/home',
                 ]
-            ]
+            ],
         ],
         [
             'text' => 'Usuarios',
@@ -329,7 +325,7 @@ return [
                 ],
                 [
                     'text' => 'Registrar Usuario',
-                    'url'  => 'resources/views/auth/register',
+                    'url'  => '#',
                 ]
             ]
         ],

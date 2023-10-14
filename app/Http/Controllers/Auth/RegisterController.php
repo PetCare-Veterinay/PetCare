@@ -70,4 +70,12 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function showAllUsers()
+    {
+        $users = User::all();
+        return view('users.index', ['users' => $users]);
+    }
+
+
 }
