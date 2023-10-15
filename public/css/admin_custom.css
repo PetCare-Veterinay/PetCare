@@ -1,7 +1,37 @@
 .button-rectangle {
-   border: 1px solid #ccc; /* Grosor y color del borde */
-   padding: 10px; /* Espaciado interno para que se vea como un botón */
-   background-color: #fff; /* Fondo blanco */
-   text-align: center; /* Alinear el texto al centro */
+   height: 115px;
+   border: 2px solid #ccc;
+   border-radius: 10px;
+   padding: 10px;
+   background-color: #fff;
+   text-align: left;
+
 }
 
+.box-content {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.number {
+   font-size: 40px; /* Tamaño del número */
+   font-weight: bold;
+   color: #6d6d6d;
+}
+
+.box-title {
+   font-size: 32px; 
+   font-family: 'Roboto';
+   color: #ccc;
+}
+
+.text-content {
+   flex: 70%; 
+}
+
+.icon {
+   flex: 30%; 
+   text-align: right; 
+   padding-bottom: 15px;
+}

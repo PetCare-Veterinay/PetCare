@@ -62,7 +62,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data) /** FUNCION PARA CREAR USUARIOS*/
     {
         return User::create([
             'name' => $data['name'],
@@ -71,7 +71,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showAllUsers()
+    public function showAllUsers()  /** FUNCION PARA SELECCIONAR A TODOS USUARIOS*/
     {
         $users = User::all();
         return view('users.index', ['users' => $users]);

@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Pet</b>Care',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'img/huella2.png',
     'logo_img_class' => 'brand-image img-circle elevation-4',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,9 +86,9 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'img/huella.png',
             'alt' => 'Auth Logo',
-            'class' => '',
+            'class' => 'brand-image img-circle',
             'width' => 50,
             'height' => 50,
         ],
@@ -109,8 +109,8 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'path' => 'img/huella.png',
+            'alt' => 'logo huella ',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -187,12 +187,12 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'bg-light',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-info elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -308,46 +308,36 @@ return [
         [
             'text' => 'Home',
             'icon' => 'fas fa-fw fa-home',
-            'submenu' => [
-                [
-                    'text' => 'Home',
-                    'url'  => '/home',
-                ]
-            ],
+            'url'  => '/home',
+            
         ],
         [
-            'text' => 'Usuarios',
+            'text' => 'Clientes',
             'icon' => 'fas fa-fw fa-users',
-            'submenu' => [
-                [
-                    'text' => 'Usuarios',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Registrar Usuario',
-                    'url'  => '#',
-                ]
-            ]
+            'url'  => '#',
         ],
         [
-            'text' => 'Calendario',
+            'text' => 'Pacientes',
+            'icon' => 'fas fa-fw fa-paw',
+            'url'  => '#',
+            
+        ],
+        [
+            'text' => 'Citas',
             'icon' => 'fas fa-fw fa-calendar',
-            'submenu' => [
-                [
-                    'text' => 'Home',
-                    'url'  => '/home',
-                ]
-            ]
+            'url'  => '#',
+            
         ],
         [
-            'text' => 'Facturas',
-            'icon' => 'fas fa-fw fa-print',
-            'submenu' => [
-                [
-                    'text' => 'Home',
-                    'url'  => '/home',
-                ]
-            ]
+            'text' => 'Ventas',
+            'icon' => 'fas fa-fw  fa-cart-plus',
+            'url'  => '#',
+            
+        ],
+        [
+            'text' => 'Doctores',
+            'icon' => 'fas fa-fw  fa-stethoscope',
+            'url'  => '#',
         ],
  
     ],
