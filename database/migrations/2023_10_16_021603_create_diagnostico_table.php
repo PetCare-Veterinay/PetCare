@@ -24,7 +24,6 @@ class CreateDiagnosticoTable extends Migration
             $table->timestamps();
             $table->foreign('Tratamiento_idTratamiento')->references('idTratamiento')->on('tratamiento');
  
-            
         });
     }
 
