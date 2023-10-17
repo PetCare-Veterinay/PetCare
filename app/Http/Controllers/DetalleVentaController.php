@@ -23,9 +23,30 @@ class DetalleVentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Cantidad' => 'required',
+            'idProducto' => 'required',
+            'idServicio'=>'required',
+            
+        ]);
+
+        // Crea un nuevo detalle de venta
+
+        $detalleV = new detalleV();
+        $detalleV->cantidad = $request->input('Cantidad');
+        $detalleV->idProducto = $request->input('idProducto');
+        $detalleV->idServicio = $request->input('idServicio');
+        $detalleV->save();
+
+        $data=[
+            'message'=>'client created successfully',
+            'client'=>$detalleV
+        ];
+
+        return response()->json($data); 
     }
 
     /**

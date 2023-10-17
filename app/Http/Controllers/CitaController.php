@@ -35,7 +35,7 @@ class CitaController extends Controller
             
         ]);
 
-        // Crea un nuevo cliente
+        // Crea una nueva cita
 
         $cita = new Cita();
         $cita->Motivo = $request->input('Motivo');
