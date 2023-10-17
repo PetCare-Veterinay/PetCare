@@ -46,6 +46,13 @@ class DetalleVentaController extends Controller
         }
     }
 
+    public function store(Request $request)
+    {
+        $inputs = $request  ->input();
+        $respuesta= DetalleVenta::create($inputs);
+        return $respuesta;
+    }
+
     public function update(Request $request, $id)
     {
         $detalleVenta = DetalleVenta::find($id);
