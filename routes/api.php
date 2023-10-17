@@ -43,4 +43,8 @@ Route::get('/detalleV', 'App\Http\Controllers\DetalleVentaController@index');
 //Route::put('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@update');
 //Route::post('/detalleV', 'App\Http\Controllers\DetalleVentaController@store');
 //Route::get('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@show');
-Route::delete('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@destroy');
+//Route::delete('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@destroy');
+
+
+//DIAGNOSTICO
+Route::get('/diagnostico', 'App\Http\Controllers\DiagnosticoController@index');

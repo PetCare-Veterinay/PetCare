@@ -14,7 +14,8 @@ class DiagnosticoController extends Controller
      */
     public function index()
     {
-        //
+        $client = Diagnostico::all();
+        return response()->json($client);
     }
 
     /**
