@@ -23,10 +23,36 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Nombre' => 'required',
+            'Apellido' => 'required',
+            'Telefono'=>'required',
+            'email' => 'email',
+            'Direccion'=>'required',
+            
+        ]);
+
+        // Crea un nuevo cliente
+
+        $client = new Cliente();
+        $client->nombre = $request->input('Nombre');
+        $client->apellido = $request->input('Apellido');
+        $client->Telefono = $request->input('Telefono');
+        $client->email = $request->input('email');
+        $client->Direccion = $request->input('Direccion');
+        $client->save();
+
+        $data=[
+            'message'=>'client created successfully',
+            'client'=>$client
+        ];
+
+        return response()->json($data); 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -47,7 +73,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return response()->json($cliente);
     }
 
     /**
@@ -70,7 +96,25 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $request->validate([
+            'Nombre' => 'required',
+            'Apellido' => 'required',
+            'Telefono' => 'required',
+            'email' => 'email',
+            'Direccion' => 'required',
+        ]);
+
+        $cliente->nombre = $request->input('Nombre');
+        $cliente->apellido = $request->input('Apellido');
+        $cliente->Telefono = $request->input('Telefono');
+        $cliente->email = $request->input('email');
+        $cliente->Direccion = $request->input('Direccion');
+        $cliente->save();
+
+        return response()->json([
+            'message' => 'Cliente actualizado exitosamente',
+            'client' => $cliente
+        ]);
     }
 
     /**

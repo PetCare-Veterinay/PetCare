@@ -14,7 +14,8 @@ class CitaController extends Controller
      */
     public function index()
     {
-        //
+        $cita = Cita::all();
+        return response()-> json($cita);
     }
 
     /**
