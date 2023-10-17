@@ -79,7 +79,7 @@ class ClienteController extends Controller
         if(isset($e)){
             return response ()->json([
                 'data'=>$e,
-                'message'=>"no existe el cliente",
+                'message'=>" Cliente encontrado",
             ]);
         }
     }
@@ -129,18 +129,17 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        // Verificar si el cliente existe
-    
-        if (!$cliente) {
-            return response()->json(['message' => 'Cliente no encontrado'], 404);
+        $e=Cliente::find($id);
+        if(isset($e)){
+            $res=Cliente::destroy($id);   
+            if($res){
+                return response ()->json([
+                    'data'=>$e,
+                    'message'=>" Cliente eliminado",
+                ]);
+            }
         }
-
-    
-        $cliente->delete();
-
-        return response()->json(['message' => 'Cliente eliminado correctamente']);
-        
     }         
 }
