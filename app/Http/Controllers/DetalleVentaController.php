@@ -97,9 +97,20 @@ class DetalleVentaController extends Controller
      * @param  \App\Models\DetalleVenta  $detalleVenta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DetalleVenta $detalleVenta)
+    public function update(Request $request, $id)
     {
-        //
+        $e = detalleV::find($id);
+        if (isset($e)) {
+            $e->Cantidad = $request->Cantidad;
+            $e->idProducto = $request->idProducto;
+            $e->idServicio = $request->idServicio; 
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el servicio'
+            ]);
+        }
     }
 
     /**
