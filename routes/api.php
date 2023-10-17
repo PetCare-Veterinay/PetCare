@@ -48,3 +48,8 @@ Route::get('/detalleV', 'App\Http\Controllers\DetalleVentaController@index');
 
 //DIAGNOSTICO
 Route::get('/diagnostico', 'App\Http\Controllers\DiagnosticoController@index');
+//Route::put('/diagnostico/{diagnostico}', 'App\Http\Controllers\DiagnosticoController@update');
+//Route::post('/diagnostico', 'App\Http\Controllers\DiagnosticoController@store');
+//Route::get('/diagnostico/{diagnostico}', 'App\Http\Controllers\DiagnosticoController@show');
+Route::delete('/diagnostico/{diagnostico}', 'App\Http\Controllers\DiagnosticoController@destroy');
+

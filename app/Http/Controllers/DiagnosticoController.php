@@ -108,7 +108,7 @@ class DiagnosticoController extends Controller
         $e = Diagnostico::find($id);
         if (isset($e)) {
             $e->Vacunas = $request->Vacunas;
-            $e->Examenes_Laboratorio = $request->Examenes;
+            $e->Examenes_Laboratorio = $request->Examenes_Laboratorio;
             $e->Recomendaciones = $request->Recomendaciones; 
             $e->Plan_Seguimiento = $request->Plan_Seguimiento;
             $e->Enfermedades = $request->Enfermedades;
