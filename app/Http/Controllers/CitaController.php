@@ -62,7 +62,9 @@ class CitaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= Cita::create($inputs);
+        return $respuesta;
     }
 
     /**
