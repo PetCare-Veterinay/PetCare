@@ -128,8 +128,17 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diagnostico $diagnostico)
+    public function destroy($id)
     {
-        //
+        $e=Diagnostico::find($id);
+        if(isset($e)){
+            $res=Diagnostico::destroy($id);   
+            if($res){
+                return response ()->json([
+                    'data'=>$e,
+                    'message'=>" Diagnostico eliminado",
+                ]);
+            }
+        }
     }
 }
