@@ -119,8 +119,17 @@ class DetalleVentaController extends Controller
      * @param  \App\Models\DetalleVenta  $detalleVenta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DetalleVenta $detalleVenta)
+    public function destroy($id)
     {
-        //
+        $e=detalleV::find($id);
+        if(isset($e)){
+            $res=detalleV::destroy($id);   
+            if($res){
+                return response ()->json([
+                    'data'=>$e,
+                    'message'=>" Detalle de Venta eliminado",
+                ]);
+            }
+        }
     }
 }
