@@ -23,9 +23,35 @@ class CitaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Motivo' => 'required',
+            'Fecha' => 'required',
+            'Hora'=>'required',
+            'idPaciente' => 'email',
+            'idDiagnostico'=>'required',
+            
+        ]);
+
+        // Crea un nuevo cliente
+
+        $cita = new Cita();
+        $cita->Motivo = $request->input('Motivo');
+        $cita->Fecha = $request->input('Fecha');
+        $cita->Hora = $request->input('Hora');
+        $cita->idPaciente = $request->input('idPaciente');
+        $cita->idDiagnostico = $request->input('idDiagnostico');
+        $cita->save();
+
+        $data=[
+            'message'=>'cita created successfully',
+            'cita'=>$cita
+        ];
+
+        return response()->json($data); 
+        
     }
 
     /**

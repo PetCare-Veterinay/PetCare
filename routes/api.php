@@ -20,10 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
 
-//Route::get('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@index');
-//Route::put('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@update');
-//Route::post('/cliente', 'App\Http\Controllers\ClienteController@store');
-Route::delete('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@destroy');
+Route::get('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@index');
+Route::put('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@update');
+Route::post('/cliente', 'App\Http\Controllers\ClienteController@store');
+//Route::delete('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@destroy');
 
 
 
