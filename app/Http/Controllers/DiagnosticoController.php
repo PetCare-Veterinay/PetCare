@@ -103,9 +103,23 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diagnostico $diagnostico)
+    public function update(Request $request, $id)
     {
-        //
+        $e = Diagnostico::find($id);
+        if (isset($e)) {
+            $e->Vacunas = $request->Vacunas;
+            $e->Examenes_Laboratorio = $request->Examenes;
+            $e->Recomendaciones = $request->Recomendaciones; 
+            $e->Plan_Seguimiento = $request->Plan_Seguimiento;
+            $e->Enfermedades = $request->Enfermedades;
+            $e->idTratamiento = $request->idTratamiento;
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el diagnostico'
+            ]);
+        }
     }
 
     /**
