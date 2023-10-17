@@ -126,8 +126,17 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cita $cita)
+    public function destroy($id)
     {
-        //
+        $e=Cita::find($id);
+        if(isset($e)){
+            $res=Cita::destroy($id);   
+            if($res){
+                return response ()->json([
+                    'data'=>$e,
+                    'message'=>" Cita eliminada",
+                ]);
+            }
+        }
     }
 }
