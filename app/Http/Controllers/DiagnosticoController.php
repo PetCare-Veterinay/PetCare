@@ -74,9 +74,15 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function show(Diagnostico $diagnostico)
+    public function show($id)
     {
-        //
+        $e=Diagnostico::find($id);
+        if(isset($e)){
+            return response ()->json([
+                'data'=>$e,
+                'message'=>" Diagnostico encontrado",
+            ]);
+        }
     }
 
     /**
