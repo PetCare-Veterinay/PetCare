@@ -102,9 +102,22 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cita $cita)
+    public function update(Request $request, $id)
     {
-        //
+        $e = Cita::find($id);
+        if (isset($e)) {
+            $e->Motivo = $request->Motivo;
+            $e->Fecha = $request->Fecha;
+            $e->Hora = $request->Hora; 
+            $e->idPaciente = $request->idPaciente;
+            $e->idDiagnostico = $request->idDiagnostico;
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe la cita'
+            ]);
+        }
     }
 
     /**

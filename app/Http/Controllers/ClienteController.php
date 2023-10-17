@@ -110,7 +110,7 @@ class ClienteController extends Controller
         if (isset($e)) {
             $e->Nombre = $request->Nombre;
             $e->Apellido = $request->Apellido;
-            $e->Telefono = $request->Telefono; // Este es el campo que está causando el error
+            $e->Telefono = $request->Telefono; 
             $e->email = $request->email;
             $e->Direccion = $request->Direccion;
             return $e->save();
