@@ -14,7 +14,8 @@ class DetalleVentaController extends Controller
      */
     public function index()
     {
-        //
+        $detalleV = DetalleVenta::all();
+        return response()->json($detalleV);
     }
 
     /**

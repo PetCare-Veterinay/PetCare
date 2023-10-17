@@ -35,3 +35,8 @@ Route::get('/cita', 'App\Http\Controllers\CitaController@index');
 //Route::post('/cita', 'App\Http\Controllers\CitaController@store');
 //Route::get('/cita/{cita}', 'App\Http\Controllers\CitaController@show');
 //Route::delete('/cita/{cita}', 'App\Http\Controllers\CitaController@destroy');
+
+
+
+//DETALLE VENTA
+Route::get('/detalleV', 'App\Http\Controllers\DetalleVentaController@index');
