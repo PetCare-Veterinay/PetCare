@@ -62,7 +62,9 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= Cliente::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -71,10 +73,17 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        return response()->json($cliente);
+        $e=Cliente::find($id);
+        if(isset($e)){
+            return response ()->json([
+                'data'=>$e,
+                'message'=>"no existe el cliente",
+            ]);
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -94,28 +103,25 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
+
     {
-        $request->validate([
-            'Nombre' => 'required',
-            'Apellido' => 'required',
-            'Telefono' => 'required',
-            'email' => 'email',
-            'Direccion' => 'required',
-        ]);
-
-        $cliente->nombre = $request->input('Nombre');
-        $cliente->apellido = $request->input('Apellido');
-        $cliente->Telefono = $request->input('Telefono');
-        $cliente->email = $request->input('email');
-        $cliente->Direccion = $request->input('Direccion');
-        $cliente->save();
-
-        return response()->json([
-            'message' => 'Cliente actualizado exitosamente',
-            'client' => $cliente
-        ]);
+        $e = Cliente::find($id);
+        if (isset($e)) {
+            $e->Nombre = $request->Nombre;
+            $e->Apellido = $request->Apellido;
+            $e->Telefono = $request->Telefono; // Este es el campo que está causando el error
+            $e->email = $request->email;
+            $e->Direccion = $request->Direccion;
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el cliente'
+            ]);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -125,8 +131,16 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
+        // Verificar si el cliente existe
+    
+        if (!$cliente) {
+            return response()->json(['message' => 'Cliente no encontrado'], 404);
+        }
+
+    
         $cliente->delete();
 
-        return response()->json(['message' => 'Cliente eliminado exitosamente']);
-    }
+        return response()->json(['message' => 'Cliente eliminado correctamente']);
+        
+    }         
 }
