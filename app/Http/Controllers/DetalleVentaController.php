@@ -7,129 +7,79 @@ use Illuminate\Http\Request;
 
 class DetalleVentaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $detalleV = DetalleVenta::all();
-        return response()->json($detalleV);
+        $detalleVenta = DetalleVenta::all();
+        return response()->json($detalleVenta);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $request->validate([
-    
             'Cantidad' => 'required',
             'idProducto' => 'required',
-            'idServicio'=>'required',
-            
+            'idServicio' => 'required',
         ]);
 
-        // Crea un nuevo detalle de venta
+        $detalleVenta = new DetalleVenta();
+        $detalleVenta->Cantidad = $request->input('Cantidad');
+        $detalleVenta->idProducto = $request->input('idProducto');
+        $detalleVenta->idServicio = $request->input('idServicio');
+        $detalleVenta->save();
 
-        $detalleV = new detalleV();
-        $detalleV->cantidad = $request->input('Cantidad');
-        $detalleV->idProducto = $request->input('idProducto');
-        $detalleV->idServicio = $request->input('idServicio');
-        $detalleV->save();
-
-        $data=[
-            'message'=>'client created successfully',
-            'client'=>$detalleV
+        $data = [
+            'message' => 'Detalle de venta creado exitosamente',
+            'detalleVenta' => $detalleVenta,
         ];
 
-        return response()->json($data); 
+        return response()->json($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $inputs = $request  ->input();
-        $respuesta= detalleV::create($inputs);
-        return $respuesta;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $e=detalleV::find($id);
-        if(isset($e)){
-            return response ()->json([
-                'data'=>$e,
-                'message'=>" Detalle de venta encontrado",
+        $detalleVenta = DetalleVenta::find($id);
+        if (isset($detalleVenta)) {
+            return response()->json([
+                'data' => $detalleVenta,
+                'message' => 'Detalle de venta encontrado',
             ]);
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DetalleVenta $detalleVenta)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $e = detalleV::find($id);
-        if (isset($e)) {
-            $e->Cantidad = $request->Cantidad;
-            $e->idProducto = $request->idProducto;
-            $e->idServicio = $request->idServicio; 
-            return $e->save();
+        $detalleVenta = DetalleVenta::find($id);
+        if (isset($detalleVenta)) {
+            $detalleVenta->Cantidad = $request->input('Cantidad');
+            $detalleVenta->idProducto = $request->input('idProducto');
+            $detalleVenta->idServicio = $request->input('idServicio');
+            $detalleVenta->save();
+            return response()->json([
+                'message' => 'Detalle de venta actualizado exitosamente',
+                'detalleVenta' => $detalleVenta,
+            ]);
         } else {
             return response()->json([
                 'error' => true,
-                'message' => 'No existe el servicio'
+                'message' => 'Detalle de venta no encontrado',
             ]);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $e=detalleV::find($id);
-        if(isset($e)){
-            $res=detalleV::destroy($id);   
-            if($res){
-                return response ()->json([
-                    'data'=>$e,
-                    'message'=>" Detalle de Venta eliminado",
-                ]);
-            }
+        $detalleVenta = DetalleVenta::find($id);
+        if (isset($detalleVenta)) {
+            $detalleVenta->delete();
+            return response()->json([
+                'data' => $detalleVenta,
+                'message' => 'Detalle de venta eliminado',
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Detalle de venta no encontrado',
+            ]);
         }
     }
 }
