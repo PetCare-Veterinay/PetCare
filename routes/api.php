@@ -22,14 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //CLIENTES
 Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
 
-//Route::get('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@index');
+//Route::get('/cliente/{id}', 'App\Http\Controllers\ClienteController@show');
 //Route::put('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@update');
 //Route::post('/cliente', 'App\Http\Controllers\ClienteController@store');
 //Route::delete('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@destroy');
-//Route::get('/cita', 'App\Http\Controllers\CitaController@index');
+
 
 
 //CITA
 Route::get('/cita', 'App\Http\Controllers\CitaController@index');
 //Route::put('/cita/{cita}', 'App\Http\Controllers\CitaController@update');
 //Route::post('/cita', 'App\Http\Controllers\CitaController@store');
+//Route::get('/cita/{cita}', 'App\Http\Controllers\CitaController@show');
+//Route::delete('/cita/{cita}', 'App\Http\Controllers\CitaController@destroy');
