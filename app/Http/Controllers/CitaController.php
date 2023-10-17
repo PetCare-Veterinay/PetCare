@@ -73,9 +73,15 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function show(Cita $cita)
+    public function show($id)
     {
-        //
+        $e=Cita::find($id);
+        if(isset($e)){
+            return response ()->json([
+                'data'=>$e,
+                'message'=>" Cita encontrada",
+            ]);
+        }
     }
 
     /**
