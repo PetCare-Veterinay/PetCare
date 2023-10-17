@@ -68,9 +68,15 @@ class DetalleVentaController extends Controller
      * @param  \App\Models\DetalleVenta  $detalleVenta
      * @return \Illuminate\Http\Response
      */
-    public function show(DetalleVenta $detalleVenta)
+    public function show($id)
     {
-        //
+        $e=detalleV::find($id);
+        if(isset($e)){
+            return response ()->json([
+                'data'=>$e,
+                'message'=>" Detalle de venta encontrado",
+            ]);
+        }
     }
 
     /**
