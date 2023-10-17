@@ -57,7 +57,9 @@ class DetalleVentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= detalleV::create($inputs);
+        return $respuesta;
     }
 
     /**
