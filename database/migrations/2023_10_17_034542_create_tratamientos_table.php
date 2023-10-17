@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTratamientoTable extends Migration
+class CreateTratamientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateTratamientoTable extends Migration
      */
     public function up()
     {
-        Schema::create('tratamiento', function (Blueprint $table) {
-            $table->id('idTratamiento');
+        Schema::create('tratamientos', function (Blueprint $table) {
+            $table->id();
             $table->date('Fecha_Inicio');
             $table->date('Fecha_Final');
             $table->string('Nombre_tratamiento', 45);
@@ -33,6 +33,6 @@ class CreateTratamientoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tratamiento');
+        Schema::dropIfExists('tratamientos');
     }
 }

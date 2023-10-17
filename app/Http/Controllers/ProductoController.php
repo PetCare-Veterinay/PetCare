@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Diagnostico;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class DiagnosticoController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DiagnosticoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Diagnostico  $diagnostico
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Diagnostico $diagnostico)
+    public function show(Producto $producto)
     {
         //
     }
@@ -52,10 +52,10 @@ class DiagnosticoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Diagnostico  $diagnostico
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Diagnostico $diagnostico)
+    public function edit(Producto $producto)
     {
         //
     }
@@ -64,10 +64,10 @@ class DiagnosticoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Diagnostico  $diagnostico
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diagnostico $diagnostico)
+    public function update(Request $request, Producto $producto)
     {
         //
     }
@@ -75,10 +75,10 @@ class DiagnosticoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Diagnostico  $diagnostico
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diagnostico $diagnostico)
+    public function destroy(Producto $producto)
     {
         //
     }
