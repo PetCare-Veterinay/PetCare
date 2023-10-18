@@ -97,7 +97,7 @@ class TratamientoController extends Controller
             'dose' => $request->input('dose'),
             'duration' => $request->input('duration'),
             'cost' => $request->input('cost'),
-        ])
+        ]);
 
         return redirect()->route('tratamiento.index')->with('success', 'Updated treatment');
     }

@@ -23,3 +23,5 @@ Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
 Route::get('/servicio', 'App\Http\Controllers\ServicioController@index');
 
 Route::get('/paciente', 'App\Http\Controllers\PacienteController@index');
+
+Route::get('/tratamiento', 'App\Http\Controllers\TratamientoController@index');
