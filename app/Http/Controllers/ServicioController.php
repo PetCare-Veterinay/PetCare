@@ -26,10 +26,11 @@ class ServicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Servicio $servicio)
+    public function create(Request $request)
     {
         //
         $servicio = Servicio::create([
+
             'id' => $request->input('id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),

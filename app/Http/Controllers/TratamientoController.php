@@ -24,17 +24,19 @@ class TratamientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        'start_date' = $request->input('start_date');
-        'final_date' = $request->input('final_date');
-        'treatment_name' = $request->input('treatment_name');
-        'medicamento' = $request->input('medicamento');
-        'dose' = $request->input('dose');
-        'duration' = $request->input('duration');
-        'cost' = $request->input('cost');
-
+        $tratamiento = Tratamiento::create([
+            
+        'start_date' => $request->input('start_date'),
+        'final_date' => $request->input('final_date'),
+        'treatment_name' => $request->input('treatment_name'),
+        'medicamento' => $request->input('medicamento'),
+        'dose' => $request->input('dose'),
+        'duration' => $request->input('duration'),
+        'cost' => $request->input('cost'),
+        ]);
         return response()->json($tratamiento);
         
     }
@@ -56,7 +58,7 @@ class TratamientoController extends Controller
      * @param  \App\Models\Tratamiento  $tratamiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Tratamiento $tratamiento)
+    public function show(Tratamiento $id)
     {
         //
         $tratamiento = Tratamiento::find($id);
@@ -87,13 +89,15 @@ class TratamientoController extends Controller
     public function update(Request $request, Tratamiento $tratamiento)
     {
         //
-        'start_date' = $request->input('start_date');
-        'final_date' = $request->input('final_date');
-        'treatment_name' = $request->input('treatment_name');
-        'medicamento' = $request->input('medicamento');
-        'dose' = $request->input('dose');
-        'duration' = $request->input('duration');
-        'cost' = $request->input('cost');
+        $tratamiento->update([
+            'start_date' => $request->input('start_date'),
+            'final_date' => $request->input('final_date'),
+            'treatment_name' => $request->input('treatment_name'),
+            'medicamento' => $request->input('medicamento'),
+            'dose' => $request->input('dose'),
+            'duration' => $request->input('duration'),
+            'cost' => $request->input('cost'),
+        ])
 
         return redirect()->route('tratamiento.index')->with('success', 'Updated treatment');
     }

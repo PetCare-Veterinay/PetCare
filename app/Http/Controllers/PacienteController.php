@@ -24,7 +24,7 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Paciente $paciente)
+    public function create(Request $request)
     {
         //
         $paciente = Paciente::create([
