@@ -12,9 +12,13 @@ class ServicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+  
+        
     public function index()
     {
         //
+        $servicio = Servicio::all();
+        return response()->json($servicio);
     }
 
     /**
@@ -25,6 +29,7 @@ class ServicioController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -33,9 +38,17 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Servicio $servicio)
     {
         //
+        $servicio = Servicio::create([
+            'id' => $request->input('id'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+        ]);
+    
+        return response()->json($servicio);
     }
 
     /**
@@ -44,9 +57,14 @@ class ServicioController extends Controller
      * @param  \App\Models\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function show(Servicio $servicio)
+    public function show(Servicio $id)
     {
         //
+        $servicio = Servicio::find($id);
+        if (!$servicio) {
+            return response()->json(['message' => 'Nervice not found']);
+        }
+        return response()->json($servicio);
     }
 
     /**
@@ -70,6 +88,14 @@ class ServicioController extends Controller
     public function update(Request $request, Servicio $servicio)
     {
         //
+        $servicio->update([
+            'id' => $request->input('id'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+        ]);
+        
+        return response()->json($servicio);
     }
 
     /**
@@ -81,5 +107,7 @@ class ServicioController extends Controller
     public function destroy(Servicio $servicio)
     {
         //
+        $servicio->delete();
+        return response()->json(['message' => 'Service removed']);
     }
 }

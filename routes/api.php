@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
 
-
+Route::get('/servicio', 'App\Http\Controllers\ServicioController@index');
