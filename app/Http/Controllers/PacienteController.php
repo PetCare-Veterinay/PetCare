@@ -24,7 +24,7 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Paciente $paciente)
     {
         //
         $paciente = Paciente::create([
@@ -55,7 +55,7 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $paciente)
+    public function show(Paciente $id)
     {
         //
         $paciente = Paciente::find($id);

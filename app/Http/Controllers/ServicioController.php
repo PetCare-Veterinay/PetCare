@@ -26,7 +26,7 @@ class ServicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Servicio $servicio)
     {
         //
         $servicio = Servicio::create([

@@ -15,6 +15,8 @@ class TratamientoController extends Controller
     public function index()
     {
         //
+        $tratamiento = Tratamiento::all();
+        return response()->json($tratamiento);
     }
 
     /**
@@ -25,6 +27,16 @@ class TratamientoController extends Controller
     public function create()
     {
         //
+        'start_date' = $request->input('start_date');
+        'final_date' = $request->input('final_date');
+        'treatment_name' = $request->input('treatment_name');
+        'medicamento' = $request->input('medicamento');
+        'dose' = $request->input('dose');
+        'duration' = $request->input('duration');
+        'cost' = $request->input('cost');
+
+        return response()->json($tratamiento);
+        
     }
 
     /**
@@ -47,6 +59,11 @@ class TratamientoController extends Controller
     public function show(Tratamiento $tratamiento)
     {
         //
+        $tratamiento = Tratamiento::find($id);
+        if (!$tratamiento) {
+            return response()->json(['message' => 'Treatment not found']);
+        }
+        return response()->json($tratamiento);
     }
 
     /**
@@ -70,6 +87,15 @@ class TratamientoController extends Controller
     public function update(Request $request, Tratamiento $tratamiento)
     {
         //
+        'start_date' = $request->input('start_date');
+        'final_date' = $request->input('final_date');
+        'treatment_name' = $request->input('treatment_name');
+        'medicamento' = $request->input('medicamento');
+        'dose' = $request->input('dose');
+        'duration' = $request->input('duration');
+        'cost' = $request->input('cost');
+
+        return redirect()->route('tratamiento.index')->with('success', 'Updated treatment');
     }
 
     /**
@@ -81,5 +107,7 @@ class TratamientoController extends Controller
     public function destroy(Tratamiento $tratamiento)
     {
         //
+        $tratamiento->delete();
+        return redirect()->route('tratamiento.index')->with('success', 'Treatment removed');
     }
 }
