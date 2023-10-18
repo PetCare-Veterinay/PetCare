@@ -14,7 +14,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $client = Producto::all();
+        return response()->json($producto);
     }
 
     /**
@@ -22,9 +23,32 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Nombre' => 'required',
+            'Descripcion' => 'required',
+            'Precio'=>'required',
+            'Stock' => 'required',
+            
+        ]);
+
+        // Crea un nuevo cliente
+
+        $producto = new Producto();
+        $producto->nombre = $request->input('Nombre');
+        $producto->descripcion = $request->input('Descripcion');
+        $producto->precio = $request->input('Precio');
+        $producto->stock = $request->input('Stock');
+        $producto->save();
+
+        $data=[
+            'message'=>'client created successfully',
+            'client'=>$producto
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -36,6 +60,9 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $inputs = $request  ->input();
+        $respuesta= producto::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -44,9 +71,15 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto)
+    public function show($id)
     {
-        //
+        $producto = producto::find($id);
+        if (isset($producto)) {
+            return response()->json([
+                'data' => $producto,
+                'message' => 'Producto encotrado',
+            ]);
+        }
     }
 
     /**
@@ -67,9 +100,25 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request,  $id)
     {
-        //
+        $producto = producto::find($id);
+        if (isset($producto)) {
+            $producto->nombre = $request->input('Nombre');
+            $producto->descripcion = $request->input('Descripcion');
+            $producto->precio = $request->input('Precio');
+            $producto->stock = $request->input('Stock');
+            $producto->save();
+            return response()->json([
+                'message' => 'Producto Actualizado Correctamente',
+                'producto' => $producto,
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Detalle de venta no encontrado',
+            ]);
+        }
     }
 
     /**
@@ -78,8 +127,20 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy($id)
     {
-        //
+        $producto = producto::find($id);
+        if (isset($producto)) {
+            $producto->delete();
+            return response()->json([
+                'data' => $producto,
+                'message' => 'Producto eliminado',
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Producto no encotrado',
+            ]);
+        }
     }
 }
