@@ -15,6 +15,8 @@ class PacienteController extends Controller
     public function index()
     {
         //
+        $pacientes = Paciente::all();
+        return response()->json($pacientes);
     }
 
     /**
@@ -25,6 +27,15 @@ class PacienteController extends Controller
     public function create()
     {
         //
+        $paciente = Paciente::create([
+            'name' => $request->input('name'),
+            'species' => $request->input('species'),
+            'breed' => $request->input('breed'),
+            'date_of_birth' => $request->input('date_of_birth'),
+            'gender' => $request->input('gender'),
+            'client_id' => $request->input('client_id'),
+        ]);
+        return response()->json($paciente);
     }
 
     /**
@@ -47,6 +58,13 @@ class PacienteController extends Controller
     public function show(Paciente $paciente)
     {
         //
+        $paciente = Paciente::find($id);
+
+        if (!$paciente) {
+            return response()->json(['message' => 'Paciente not found']);
+        }
+
+        return response()->json($paciente);
     }
 
     /**
@@ -70,6 +88,15 @@ class PacienteController extends Controller
     public function update(Request $request, Paciente $paciente)
     {
         //
+        $paciente = Paciente::create([
+            'name' => $request->input('name'),
+            'species' => $request->input('species'),
+            'breed' => $request->input('breed'),
+            'date_of_birth' => $request->input('date_of_birth'),
+            'gender' => $request->input('gender'),
+            'client_id' => $request->input('client_id'),
+        ]);
+        return redirect()->route('paciente.index')->with('success', 'Patient successfully updated');
     }
 
     /**
@@ -81,5 +108,7 @@ class PacienteController extends Controller
     public function destroy(Paciente $paciente)
     {
         //
+        $paciente->delete();
+        return redirect()->route('paciente.index')->with('success', 'Patient eliminated');
     }
 }

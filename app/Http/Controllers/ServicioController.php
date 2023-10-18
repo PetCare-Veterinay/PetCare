@@ -46,7 +46,7 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Servicio $servicio)
+    public function store(Request $request)
     {
         //
         
@@ -96,7 +96,8 @@ class ServicioController extends Controller
             'price' => $request->input('price'),
         ]);
         
-        return response()->json($servicio);
+        return redirect()->route('servicio.index')->with('success', 'Service successfully updated');
+
     }
 
     /**
