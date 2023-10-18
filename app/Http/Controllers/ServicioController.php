@@ -29,6 +29,14 @@ class ServicioController extends Controller
     public function create()
     {
         //
+        $servicio = Servicio::create([
+            'id' => $request->input('id'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+        ]);
+    
+        return response()->json($servicio);
         
     }
 
@@ -41,14 +49,7 @@ class ServicioController extends Controller
     public function store(Request $request, Servicio $servicio)
     {
         //
-        $servicio = Servicio::create([
-            'id' => $request->input('id'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
-        ]);
-    
-        return response()->json($servicio);
+        
     }
 
     /**
