@@ -26,19 +26,36 @@ class TratamientoController extends Controller
      */
     public function create(Request $request)
     {
-        //
-        $tratamiento = Tratamiento::create([
+        $request->validate([
+    
+            'Fecha_Inicio' => 'required',
+            'Fecha_Final' => 'required',
+            'Nombre_tratamiento'=>'required',
+            'Medicamento'=>'required',
+            'Dosis'=>'required',
+            'Duracion'=>'required',
+            'Costo'=>'required',
             
-        'start_date' => $request->input('start_date'),
-        'final_date' => $request->input('final_date'),
-        'treatment_name' => $request->input('treatment_name'),
-        'medicamento' => $request->input('medicamento'),
-        'dose' => $request->input('dose'),
-        'duration' => $request->input('duration'),
-        'cost' => $request->input('cost'),
         ]);
-        return response()->json($tratamiento);
-        
+
+        // Crea un nuevo cliente
+
+        $tratamiento = new Tratameinto();
+        $tratamiento->Fecha_Inicio = $request->input('Fecha_Inicio');
+        $tratamiento->Fecha_Final = $request->input('Fecha_Final');
+        $tratamiento->Nombre_tratamiento = $request->input('Nombre_tratamiento');
+        $tratamiento->Medicamento = $request->input('Medicamento');
+        $tratamiento->Dosis = $request->input('Dosis');
+        $tratamiento->Duracion = $request->input('Duracion');
+        $tratamiento->Costo = $request->input('Costo');
+        $tratamiento->save();
+
+        $data=[
+            'message'=>'Successfully created treatment',
+            'tratamiento'=>$tratamiento
+        ];
+
+        return response()->json($data); 
     }
 
     /**
@@ -49,7 +66,9 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= Tratameinto::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -86,20 +105,26 @@ class TratamientoController extends Controller
      * @param  \App\Models\Tratamiento  $tratamiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tratamiento $tratamiento)
-    {
-        //
-        $tratamiento->update([
-            'start_date' => $request->input('start_date'),
-            'final_date' => $request->input('final_date'),
-            'treatment_name' => $request->input('treatment_name'),
-            'medicamento' => $request->input('medicamento'),
-            'dose' => $request->input('dose'),
-            'duration' => $request->input('duration'),
-            'cost' => $request->input('cost'),
-        ]);
+    public function update(Request $request, $id)
 
-        return redirect()->route('tratamiento.index')->with('success', 'Updated treatment');
+    {
+        $e = Tratamiento::find($id);
+        if (isset($e)) {
+            $e->Fecha_Inicio = $request->Fecha_Inicio;
+            $e->Fecha_Final = $request->Fecha_Final;
+            $e->Nombre_tratamiento = $request->Nombre_tratameinto; 
+            $e->Medicamento = $request->Medicamento;
+            $e->Dosis = $request->Dosis;
+            $e->Duracion = $request->Duracion;
+            $e->Costo = $request->Costo;   
+            
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el Medicamento'
+            ]);
+        }
     }
 
     /**
@@ -112,6 +137,6 @@ class TratamientoController extends Controller
     {
         //
         $tratamiento->delete();
-        return redirect()->route('tratamiento.index')->with('success', 'Treatment removed');
+        return response()->json(['message' => 'Treatment removed']);
     }
 }

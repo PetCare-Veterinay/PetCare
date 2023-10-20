@@ -36,7 +36,7 @@ Route::delete('/paciente/{paciente}', 'App\Http\Controllers\PacienteController@d
 
 //TRATAMIENTO
 Route::get('/tratamiento', 'App\Http\Controllers\TratamientoController@index');
-Route::get('/tratamineto/{id}', 'App\Http\Controllers\TratamientoController@show');//consultar
+Route::get('/tratamiento/{id}', 'App\Http\Controllers\TratamientoController@show');//consultar
 Route::put('/tratamiento/{tratamiento}', 'App\Http\Controllers\TratamientoController@update');//editar
 Route::post('/tratamiento', 'App\Http\Controllers\TratamientoController@store'); // Crear
 Route::delete('/tratamiento/{tratamiento}', 'App\Http\Controllers\TratamientoController@destroy');// eliminar
