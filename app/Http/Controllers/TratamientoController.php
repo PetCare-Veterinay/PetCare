@@ -40,7 +40,7 @@ class TratamientoController extends Controller
 
         // Crea un nuevo cliente
 
-        $tratamiento = new Tratameinto();
+        $tratamiento = new Tratamiento();
         $tratamiento->Fecha_Inicio = $request->input('Fecha_Inicio');
         $tratamiento->Fecha_Final = $request->input('Fecha_Final');
         $tratamiento->Nombre_tratamiento = $request->input('Nombre_tratamiento');
@@ -67,7 +67,7 @@ class TratamientoController extends Controller
     public function store(Request $request)
     {
         $inputs = $request  ->input();
-        $respuesta= Tratameinto::create($inputs);
+        $respuesta= Tratamiento::create($inputs);
         return $respuesta;
     }
 
@@ -122,7 +122,7 @@ class TratamientoController extends Controller
         } else {
             return response()->json([
                 'error' => true,
-                'message' => 'No existe el Medicamento'
+                'message' => 'No existe el Tratamiento'
             ]);
         }
     }
