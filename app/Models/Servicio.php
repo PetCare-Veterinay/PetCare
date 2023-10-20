@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Servicio extends Model
 {
     use HasFactory;
-    
+
+    protected $fillable = ['Nombre', 'Descripcion', 'Precio'];
+
     public function detalleventa(): HasMany
     {
         return $this->hasMany(DetalleVenta::class);

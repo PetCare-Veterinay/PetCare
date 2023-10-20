@@ -20,7 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
 
-Route::get('/servicio', 'App\Http\Controllers\ServicioController@index');
+Route::get('/servicio', 'App\Http\Controllers\ServicioController@index');//listar
+Route::get('/servicio/{id}', 'App\Http\Controllers\ServicioController@show');//consultar
+Route::put('/servicio/{servicio}', 'App\Http\Controllers\ServicioController@update');//editar
+Route::post('/servicio', 'App\Http\Controllers\ServicioController@store'); // Crear
+Route::delete('/servicio/{servicio}', 'App\Http\Controllers\ServicioController@destroy');// eliminar
 
 Route::get('/paciente', 'App\Http\Controllers\PacienteController@index');
 
