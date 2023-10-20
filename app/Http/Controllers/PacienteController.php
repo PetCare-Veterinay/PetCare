@@ -27,15 +27,34 @@ class PacienteController extends Controller
     public function create(Request $request)
     {
         //
-        $paciente = Paciente::create([
-            'name' => $request->input('name'),
-            'species' => $request->input('species'),
-            'breed' => $request->input('breed'),
-            'date_of_birth' => $request->input('date_of_birth'),
-            'gender' => $request->input('gender'),
-            'client_id' => $request->input('client_id'),
+        $request->validate([
+    
+            'Nombre' => 'required',
+            'Especie' => 'required',
+            'Raza'=>'required',
+            'Fecha_de_nacimineto'=>'required',
+            'Genero'=>'required',
+            'idCliente'=>'required',
+            
         ]);
-        return response()->json($paciente);
+
+        // Crea un nuevo cliente
+
+        $paciente = new Paciente();
+        $paciente->Nombre = $request->input('Nombre');
+        $paciente->Especie = $request->input('Especie');
+        $paciente->Raza = $request->input('Raza');
+        $paciente->Fecha_de_nacimiento = $request->input('Fecha_de_nacimiento');
+        $paciente->Genero = $request->input('Genero');
+        $paciente->idCliente = $request->input('idCliente');
+        $paciente->save();
+
+        $data=[
+            'message'=>'Patient successfully created',
+            'paciente'=>$paciente
+        ];
+
+        return response()->json($data); 
     }
 
     /**
@@ -47,6 +66,9 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
         //
+        $inputs = $request  ->input();
+        $respuesta= Paciente::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -85,18 +107,25 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request, $id)
+
     {
-        //
-        $paciente = Paciente::create([
-            'name' => $request->input('name'),
-            'species' => $request->input('species'),
-            'breed' => $request->input('breed'),
-            'date_of_birth' => $request->input('date_of_birth'),
-            'gender' => $request->input('gender'),
-            'client_id' => $request->input('client_id'),
-        ]);
-        return redirect()->route('paciente.index')->with('success', 'Patient successfully updated');
+        $e = Paciente::find($id);
+        if (isset($e)) {
+            $e->Nombre = $request->Nombre;
+            $e->Especie = $request->Especie;
+            $e->Raza = $request->Raza; 
+            $e->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
+            $e->Genero = $request->Genero;
+            $e->idCliente = $request->idCliente; 
+            
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el paciente'
+            ]);
+        }
     }
 
     /**
@@ -109,6 +138,6 @@ class PacienteController extends Controller
     {
         //
         $paciente->delete();
-        return redirect()->route('paciente.index')->with('success', 'Patient eliminated');
+        return response()->json(['message' => 'Patient eliminated']);
     }
 }

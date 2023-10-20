@@ -39,7 +39,7 @@ class ServicioController extends Controller
         // Crea un nuevo cliente
 
         $servicio = new Servicio();
-        $servicio->nombre = $request->input('Nombre');
+        $servicio->Nombre = $request->input('Nombre');
         $servicio->Descripcion = $request->input('Descripcion');
         $servicio->Precio = $request->input('Precio');
         $servicio->save();
