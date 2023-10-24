@@ -14,7 +14,9 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        
+        //
+        $pacientes = Paciente::all();
+        return response()->json($pacientes);
     }
 
     /**
@@ -24,7 +26,35 @@ class PacienteController extends Controller
      */
     public function create(Request $request)
     {
-        
+        //
+        $request->validate([
+    
+            'Nombre' => 'required',
+            'Especie' => 'required',
+            'Raza'=>'required',
+            'Fecha_de_nacimineto'=>'required',
+            'Genero'=>'required',
+            'idCliente'=>'required',
+            
+        ]);
+
+        // Crea un nuevo cliente
+
+        $paciente = new Paciente();
+        $paciente->Nombre = $request->input('Nombre');
+        $paciente->Especie = $request->input('Especie');
+        $paciente->Raza = $request->input('Raza');
+        $paciente->Fecha_de_nacimiento = $request->input('Fecha_de_nacimiento');
+        $paciente->Genero = $request->input('Genero');
+        $paciente->idCliente = $request->input('idCliente');
+        $paciente->save();
+
+        $data=[
+            'message'=>'Patient successfully created',
+            'paciente'=>$paciente
+        ];
+
+        return response()->json($data); 
     }
 
     /**
@@ -35,7 +65,10 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-       
+        //
+        $inputs = $request  ->input();
+        $respuesta= Paciente::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -46,7 +79,14 @@ class PacienteController extends Controller
      */
     public function show(Paciente $id)
     {
-        
+        //
+        $paciente = Paciente::find($id);
+
+        if (!$paciente) {
+            return response()->json(['message' => 'Paciente not found']);
+        }
+
+        return response()->json($paciente);
     }
 
     /**
@@ -70,7 +110,22 @@ class PacienteController extends Controller
     public function update(Request $request, $id)
 
     {
-       
+        $e = Paciente::find($id);
+        if (isset($e)) {
+            $e->Nombre = $request->Nombre;
+            $e->Especie = $request->Especie;
+            $e->Raza = $request->Raza; 
+            $e->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
+            $e->Genero = $request->Genero;
+            $e->idCliente = $request->idCliente; 
+            
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el paciente'
+            ]);
+        }
     }
 
     /**
@@ -81,6 +136,8 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
-       
+        //
+        $paciente->delete();
+        return response()->json(['message' => 'Patient eliminated']);
     }
 }
