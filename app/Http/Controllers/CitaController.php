@@ -73,15 +73,14 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cita $id)
     {
-        $e=Cita::find($id);
-        if(isset($e)){
-            return response ()->json([
-                'data'=>$e,
-                'message'=>" Cita encontrada",
-            ]);
+        //
+        $cita = Cita::find($id);
+        if (!$cita) {
+            return response()->json(['message' => 'Nervice not found']);
         }
+        return response()->json($cita);
     }
 
     /**
@@ -126,17 +125,10 @@ class CitaController extends Controller
      * @param  \App\Models\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cita $cita)
     {
-        $e=Cita::find($id);
-        if(isset($e)){
-            $res=Cita::destroy($id);   
-            if($res){
-                return response ()->json([
-                    'data'=>$e,
-                    'message'=>" Cita eliminada",
-                ]);
-            }
-        }
+        //
+        $cita->delete();
+        return response()->json(['message' => 'Cita removed']);
     }
 }

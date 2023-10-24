@@ -73,15 +73,14 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cliente $id)
     {
-        $e=Cliente::find($id);
-        if(isset($e)){
-            return response ()->json([
-                'data'=>$e,
-                'message'=>" Cliente encontrado",
-            ]);
+        //
+        $cliente = Cliente::find($id);
+        if (!$cliente) {
+            return response()->json(['message' => 'Nervice not found']);
         }
+        return response()->json($cliente);
     }
 
 
@@ -129,17 +128,10 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cliente $cliente)
     {
-        $e=Cliente::find($id);
-        if(isset($e)){
-            $res=Cliente::destroy($id);   
-            if($res){
-                return response ()->json([
-                    'data'=>$e,
-                    'message'=>" Cliente eliminado",
-                ]);
-            }
-        }
-    }         
+        //
+        $cliente->delete();
+        return response()->json(['message' => 'Client removed']);
+    }      
 }
