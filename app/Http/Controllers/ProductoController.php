@@ -14,7 +14,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $client = Producto::all();
+        $producto = Producto::all();
         return response()->json($producto);
     }
 
@@ -34,18 +34,18 @@ class ProductoController extends Controller
             
         ]);
 
-        // Crea un nuevo cliente
+        // Crea un nuevo producto
 
         $producto = new Producto();
-        $producto->nombre = $request->input('Nombre');
-        $producto->descripcion = $request->input('Descripcion');
-        $producto->precio = $request->input('Precio');
-        $producto->stock = $request->input('Stock');
+        $producto->Nombre = $request->input('Nombre');
+        $producto->Descripcion = $request->input('Descripcion');
+        $producto->Precio = $request->input('Precio');
+        $producto->Stock = $request->input('Stock');
         $producto->save();
 
         $data=[
-            'message'=>'client created successfully',
-            'client'=>$producto
+            'message'=>'Producto creado correctamente',
+            'producto'=>$producto
         ];
 
         return response()->json($data);
@@ -64,8 +64,8 @@ class ProductoController extends Controller
         $respuesta= producto::create($inputs);
         return $respuesta;
     }
-
-    /**
+    
+     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Producto  $producto
