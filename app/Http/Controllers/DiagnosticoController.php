@@ -74,15 +74,14 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Diagnostico $id)
     {
-        $e=Diagnostico::find($id);
-        if(isset($e)){
-            return response ()->json([
-                'data'=>$e,
-                'message'=>" Diagnostico encontrado",
-            ]);
+        //
+        $diagnostico = Diagnostico::find($id);
+        if (!$diagnostico) {
+            return response()->json(['message' => 'Diagnostic not found']);
         }
+        return response()->json($diagnostico);
     }
 
     /**
@@ -128,17 +127,10 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Diagnostico $diagnostico)
     {
-        $e=Diagnostico::find($id);
-        if(isset($e)){
-            $res=Diagnostico::destroy($id);   
-            if($res){
-                return response ()->json([
-                    'data'=>$e,
-                    'message'=>" Diagnostico eliminado",
-                ]);
-            }
-        }
+        //
+        $diagnostico->delete();
+        return response()->json(['message' => 'Diagnostic removed']);
     }
 }
