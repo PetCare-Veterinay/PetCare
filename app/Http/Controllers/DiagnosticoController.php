@@ -14,7 +14,8 @@ class DiagnosticoController extends Controller
      */
     public function index()
     {
-        //
+        $client = Diagnostico::all();
+        return response()->json($client);
     }
 
     /**
@@ -22,9 +23,36 @@ class DiagnosticoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Vacunas' => 'required',
+            'Examenes_Laboratorio' => 'required',
+            'Recomendaciones'=>'required',
+            'Plan_Seguimiento' => 'email',
+            'Enfermedades'=>'required',
+            'idTratamiento'=>'required'
+            
+        ]);
+
+        // Crea un nuevo cliente
+
+        $diagnostico = new Diagnostico();
+        $diagnostico->Vacunas = $request->input('Vacunas');
+        $diagnostico->Examenes_Laboratorio = $request->input('Examenes_Laboratorio');
+        $diagnostico->Recomendaciones = $request->input('Recomendaciones');
+        $diagnostico->Plan_Seguimiento = $request->input('Plan_Seguimiento');
+        $diagnostico->Enfermedades = $request->input('Enfermedades');
+        $diagnostico->idTratamiento = $request->input('idTratamiento');
+        $diagnostico->save();
+
+        $data=[
+            'message'=>'client created successfully',
+            'diagnostico'=>$diagnostico
+        ];
+
+        return response()->json($data); 
     }
 
     /**
@@ -35,7 +63,9 @@ class DiagnosticoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= Diagnostico::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -44,9 +74,15 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function show(Diagnostico $diagnostico)
+    public function show($id)
     {
-        //
+        $e=Diagnostico::find($id);
+        if(isset($e)){
+            return response ()->json([
+                'data'=>$e,
+                'message'=>" Diagnostico encontrado",
+            ]);
+        }
     }
 
     /**
@@ -67,9 +103,23 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diagnostico $diagnostico)
+    public function update(Request $request, $id)
     {
-        //
+        $e = Diagnostico::find($id);
+        if (isset($e)) {
+            $e->Vacunas = $request->Vacunas;
+            $e->Examenes_Laboratorio = $request->Examenes_Laboratorio;
+            $e->Recomendaciones = $request->Recomendaciones; 
+            $e->Plan_Seguimiento = $request->Plan_Seguimiento;
+            $e->Enfermedades = $request->Enfermedades;
+            $e->idTratamiento = $request->idTratamiento;
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el diagnostico'
+            ]);
+        }
     }
 
     /**
@@ -78,8 +128,17 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diagnostico $diagnostico)
+    public function destroy($id)
     {
-        //
+        $e=Diagnostico::find($id);
+        if(isset($e)){
+            $res=Diagnostico::destroy($id);   
+            if($res){
+                return response ()->json([
+                    'data'=>$e,
+                    'message'=>" Diagnostico eliminado",
+                ]);
+            }
+        }
     }
 }

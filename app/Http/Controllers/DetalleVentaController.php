@@ -7,79 +7,86 @@ use Illuminate\Http\Request;
 
 class DetalleVentaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $detalleVenta = DetalleVenta::all();
+        return response()->json($detalleVenta);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'Cantidad' => 'required',
+            'idProducto' => 'required',
+            'idServicio' => 'required',
+        ]);
+
+        $detalleVenta = new DetalleVenta();
+        $detalleVenta->Cantidad = $request->input('Cantidad');
+        $detalleVenta->idProducto = $request->input('idProducto');
+        $detalleVenta->idServicio = $request->input('idServicio');
+        $detalleVenta->save();
+
+        $data = [
+            'message' => 'Detalle de venta creado exitosamente',
+            'detalleVenta' => $detalleVenta,
+        ];
+
+        return response()->json($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function show($id)
+    {
+        $detalleVenta = DetalleVenta::find($id);
+        if (isset($detalleVenta)) {
+            return response()->json([
+                'data' => $detalleVenta,
+                'message' => 'Detalle de venta encontrado',
+            ]);
+        }
+    }
+
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= DetalleVenta::create($inputs);
+        return $respuesta;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
-    public function show(DetalleVenta $detalleVenta)
+    public function update(Request $request, $id)
     {
-        //
+        $detalleVenta = DetalleVenta::find($id);
+        if (isset($detalleVenta)) {
+            $detalleVenta->Cantidad = $request->input('Cantidad');
+            $detalleVenta->idProducto = $request->input('idProducto');
+            $detalleVenta->idServicio = $request->input('idServicio');
+            $detalleVenta->save();
+            return response()->json([
+                'message' => 'Detalle de venta actualizado exitosamente',
+                'detalleVenta' => $detalleVenta,
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Detalle de venta no encontrado',
+            ]);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DetalleVenta $detalleVenta)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DetalleVenta $detalleVenta)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DetalleVenta  $detalleVenta
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DetalleVenta $detalleVenta)
-    {
-        //
+        $detalleVenta = DetalleVenta::find($id);
+        if (isset($detalleVenta)) {
+            $detalleVenta->delete();
+            return response()->json([
+                'data' => $detalleVenta,
+                'message' => 'Detalle de venta eliminado',
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Detalle de venta no encontrado',
+            ]);
+        }
     }
 }

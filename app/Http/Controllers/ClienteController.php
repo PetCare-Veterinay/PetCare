@@ -23,10 +23,36 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Nombre' => 'required',
+            'Apellido' => 'required',
+            'Telefono'=>'required',
+            'email' => 'email',
+            'Direccion'=>'required',
+            
+        ]);
+
+        // Crea un nuevo cliente
+
+        $client = new Cliente();
+        $client->nombre = $request->input('Nombre');
+        $client->apellido = $request->input('Apellido');
+        $client->Telefono = $request->input('Telefono');
+        $client->email = $request->input('email');
+        $client->Direccion = $request->input('Direccion');
+        $client->save();
+
+        $data=[
+            'message'=>'client created successfully',
+            'client'=>$client
+        ];
+
+        return response()->json($data); 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +62,9 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request  ->input();
+        $respuesta= Cliente::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -45,10 +73,17 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+        $e=Cliente::find($id);
+        if(isset($e)){
+            return response ()->json([
+                'data'=>$e,
+                'message'=>" Cliente encontrado",
+            ]);
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -68,10 +103,25 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
+
     {
-        //
+        $e = Cliente::find($id);
+        if (isset($e)) {
+            $e->Nombre = $request->Nombre;
+            $e->Apellido = $request->Apellido;
+            $e->Telefono = $request->Telefono; 
+            $e->email = $request->email;
+            $e->Direccion = $request->Direccion;
+            return $e->save();
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'No existe el cliente'
+            ]);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -79,8 +129,17 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
-    }
+        $e=Cliente::find($id);
+        if(isset($e)){
+            $res=Cliente::destroy($id);   
+            if($res){
+                return response ()->json([
+                    'data'=>$e,
+                    'message'=>" Cliente eliminado",
+                ]);
+            }
+        }
+    }         
 }

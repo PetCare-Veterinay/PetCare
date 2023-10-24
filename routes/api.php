@@ -40,3 +40,38 @@ Route::get('/tratamiento/{id}', 'App\Http\Controllers\TratamientoController@show
 Route::put('/tratamiento/{tratamiento}', 'App\Http\Controllers\TratamientoController@update');//editar
 Route::post('/tratamiento', 'App\Http\Controllers\TratamientoController@store'); // Crear
 Route::delete('/tratamiento/{tratamiento}', 'App\Http\Controllers\TratamientoController@destroy');// eliminar
+
+
+//CLIENTES
+Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
+
+//Route::get('/cliente/{id}', 'App\Http\Controllers\ClienteController@show');
+//Route::put('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@update');
+//Route::post('/cliente', 'App\Http\Controllers\ClienteController@store');
+//Route::delete('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@destroy');
+
+
+
+//CITA
+Route::get('/cita', 'App\Http\Controllers\CitaController@index');
+//Route::put('/cita/{cita}', 'App\Http\Controllers\CitaController@update');
+//Route::post('/cita', 'App\Http\Controllers\CitaController@store');
+//Route::get('/cita/{cita}', 'App\Http\Controllers\CitaController@show');
+//Route::delete('/cita/{cita}', 'App\Http\Controllers\CitaController@destroy');
+
+
+
+//DETALLE VENTA
+Route::get('/detalleV', 'App\Http\Controllers\DetalleVentaController@index');
+//Route::put('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@update');
+//Route::post('/detalleV', 'App\Http\Controllers\DetalleVentaController@store');
+//Route::get('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@show');
+//Route::delete('/detalleV/{detalle}', 'App\Http\Controllers\DetalleVentaController@destroy');
+
+
+//DIAGNOSTICO
+Route::get('/diagnostico', 'App\Http\Controllers\DiagnosticoController@index');
+//Route::put('/diagnostico/{diagnostico}', 'App\Http\Controllers\DiagnosticoController@update');
+//Route::post('/diagnostico', 'App\Http\Controllers\DiagnosticoController@store');
+//Route::get('/diagnostico/{diagnostico}', 'App\Http\Controllers\DiagnosticoController@show');
+//Route::delete('/diagnostico/{diagnostico}', 'App\Http\Controllers\DiagnosticoController@destroy');
