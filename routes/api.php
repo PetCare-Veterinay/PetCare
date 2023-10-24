@@ -20,17 +20,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
 
-//productos
-Route::get('/producto', 'App\Http\Controllers\ProductoController@index');
-Route::get('/producto/{id}', 'App\Http\Controllers\ProductoController@show');
-Route::put('/producto/{producto}', 'App\Http\Controllers\ProductoController@update');
-Route::delete('/producto/{producto}', 'App\Http\Controllers\ProductoController@destroy');
-Route::post('/producto', 'App\Http\Controllers\ProductoController@store');
-
-//ventas
-Route::get('/ventas', 'App\Http\Controllers\VentasController@index');
-Route::get('/ventas/{id}', 'App\Http\Controllers\VentasController@show');
-Route::put('/ventas/{ventas}', 'App\Http\Controllers\VentasController@update');
-Route::delete('/ventas/{ventas}', 'App\Http\Controllers\VentasController@destroy');
-Route::post('/ventas', 'App\Http\Controllers\VentasController@store');
-
