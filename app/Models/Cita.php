@@ -9,4 +9,15 @@ class Cita extends Model
 {
     use HasFactory;
     protected $fillable = ['Motivo', 'Fecha', 'Hora', 'idPaciente', 'idDiagnostico'];
+
+    public function paciente()
+    {
+        return $this->hasMany(Paciente::class);
+    }
+
+    public function cliente()
+    {
+        return $this->hasMany(Cliente::class);
+    }
+
 }

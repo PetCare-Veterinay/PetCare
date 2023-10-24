@@ -18,7 +18,7 @@ class Cliente extends Model
 
     public function pacientes()
     {
-        return $this->hasMany(Pacientes::class);
+        return $this->hasMany(Paciente::class);
     }
 }
 
