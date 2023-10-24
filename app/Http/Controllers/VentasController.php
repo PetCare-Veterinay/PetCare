@@ -15,16 +15,38 @@ class VentasController extends Controller
     public function index()
     {
         //
+        $ventas = Ventas::all();
+        return response()->json($ventas);
     }
+    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+    
+            'Fecha' => 'required',
+            'Precio_Total' => 'required',
+            
+        ]);
+
+        // Crea una nueva venta 
+
+        $ventas = new Ventas();
+        $ventas->Fecha = $request->input('Fecha');
+        $ventas->Precio_Total = $request->input('Precio_Total');
+        $ventas->save();
+
+        $data=[
+            'message'=>'Venta creada correctamente',
+            'ventas'=>$ventas
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -36,6 +58,9 @@ class VentasController extends Controller
     public function store(Request $request)
     {
         //
+        $inputs = $request  ->input();
+        $respuesta= ventas::create($inputs);
+        return $respuesta;
     }
 
     /**
@@ -44,9 +69,16 @@ class VentasController extends Controller
      * @param  \App\Models\Ventas  $ventas
      * @return \Illuminate\Http\Response
      */
-    public function show(Ventas $ventas)
+    public function show($id)
     {
         //
+        $ventas = ventas::find($id);
+        if (isset($ventas)) {
+            return response()->json([
+                'data' => $ventas,
+                'message' => 'Venta encotrada',
+            ]);
+        }
     }
 
     /**
@@ -67,19 +99,50 @@ class VentasController extends Controller
      * @param  \App\Models\Ventas  $ventas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ventas $ventas)
+    public function update(Request $request, $id)
     {
-        //
+        // Busca la venta por ID
+        $ventas = ventas::find($id);
+    
+        if (isset($ventas)) {
+            $ventas->id = $request->input('id');
+            $ventas->Fecha = $request->input('Fecha');
+            $ventas->Precio_total = $request->input('Precio_Total');
+            $ventas->save();
+            return response()->json([
+                'message' => 'Venta Actualizada Correctamente',
+                'ventas' => $ventas,
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Venta no encontrada',
+            ]);
+        }
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Ventas  $ventas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ventas $ventas)
+    public function destroy($id)
     {
-        //
+        $ventas = Ventas::find($id);
+        if (isset($producto)) {
+            $ventas->delete();
+            return response()->json([
+                'data' => $ventas,
+                'message' => 'Venta eliminada',
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Venta no encotrada',
+            ]);
+        }
     }
 }
+
+
