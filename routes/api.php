@@ -18,7 +18,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/cliente', 'App\Http\Controllers\ClienteController@index');
+
+//USER
+Route::get('/users', 'App\Http\Controllers\UserController@index');
+Route::post('/users', 'App\Http\Controllers\UserController@store');
+Route::get('/users/{id}', 'App\Http\Controllers\UserController@show');
+Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
+Route::delete('/users/{id}', 'App\Http\Controllers\UserController@destroy');
+
+
 
 //SERVICIO
 Route::get('/servicio', 'App\Http\Controllers\ServicioController@index');//listar

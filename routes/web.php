@@ -17,14 +17,12 @@ Route::get('/', function () {
     return view('/auth/login');
 });
 
-Route::get('/Cliente', function () {
-    return view('clientes');
-});
-
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+
+Route::get('/users-list', function () {
+    return view('users.user');
+});

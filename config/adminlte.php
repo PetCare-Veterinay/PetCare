@@ -339,6 +339,11 @@ return [
             'icon' => 'fas fa-fw  fa-stethoscope',
             'url'  => '#',
         ],
+        [
+            'text' => 'Usuarios',
+            'icon' => 'fas fa-fw fa-user',
+            'url' => '/users-list/', // Asegúrate de usar la ruta correcta
+        ],
  
     ],
 
