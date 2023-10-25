@@ -15,38 +15,28 @@
     <div class="content" style="background-color: #fff; border: 2px solid #fff; padding: 35px;">
     <!-- Buscador y Botón de Agregar -->
     <div class="d-flex justify-content-between mb-3">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Buscar">
-        </div>
-        <button class="btn btn-primary">Agregar</button>
+    <div class="form-group flex-grow-1 mr-2">
+        <input type="text" class="form-control" placeholder="Buscar">
+    </div>
+        <button class="btn btn-primary large_buttom"> + Agregar</button>
     </div>
     
     <!-- Lista de Datos -->
     <div class="box">
         <div class="box-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><ul id="name"></ul></td>
-                        <td>johndoe@example.com</td>
-                        <td>
-                            <button class="btn btn-info">Editar</button>
-                            <button class="btn btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
-                    <!-- Puedes agregar más filas de datos aquí -->
-                </tbody>
-            </table>
-        </div>
+                 <table class="table table-hover custom-table">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
     </div>
 </div>
 
@@ -57,13 +47,49 @@
         fetch('/api/users') 
             .then(response => response.json())
             .then(data => {
-                const username = document.getElementById('name');
+                const tableBody = document.querySelector('table tbody');
+
                 data.forEach(user => {
-                    const li = document.createElement('li');
-                    li.textContent = user.name; 
-                    username.appendChild(li);
+                    const row = document.createElement('tr');
+                    
+                    // Crear celdas para ID, Nombre y Email
+                    const idCell = document.createElement('td');
+                    idCell.textContent = user.id;
+                    
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = user.name;
+                    
+                    const emailCell = document.createElement('td');
+                    emailCell.textContent = user.email;
+                    
+                    // Crear celda para los botones de "Editar" y "Eliminar"
+                    const actionsCell = document.createElement('td');
+                    const editButton = document.createElement('button');
+                    editButton.className = 'btn btn-info';
+                    editButton.textContent = 'Editar';
+                    
+                    // Agregar un espacio entre los botones
+                    const space = document.createTextNode('  ');
+                    
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'btn btn-danger';
+                    deleteButton.textContent = 'Eliminar';
+                    
+                    actionsCell.appendChild(editButton);
+                    actionsCell.appendChild(space);
+                    actionsCell.appendChild(deleteButton);
+                    
+                    // Agregar las celdas a la fila de la tabla
+                    row.appendChild(idCell);
+                    row.appendChild(nameCell);
+                    row.appendChild(emailCell);
+                    row.appendChild(actionsCell);
+                    
+                    // Agregar la fila a la tabla
+                    tableBody.appendChild(row);
                 });
             });
+
     </script>
 @stop
 

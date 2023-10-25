@@ -61,3 +61,12 @@
    align-items: center;
    justify-content: center;
 }
+
+.custom-table thead {
+   background-color: #18A2B8; /* Cambia el color de fondo de la cabecera de la tabla a #754868 */
+   color: white; /* Cambia el color del texto de la cabecera a blanco (por contraste) */
+}
+
+.large_buttom {
+   width: 200px;
+}
