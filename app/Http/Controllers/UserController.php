@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,9 +18,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // Crear un nuevo usuario
-        $user = User::create($request->all());
-        return response()->json($user, 201);
+        return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
     }
 
     public function show($id)
@@ -31,17 +34,34 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Actualizar un usuario
+        // Obtener el usuario que se va a actualizar
         $user = User::find($id);
-        $user->update($request->all());
+
+        // Aplicar los cambios solo si los datos pasaron la validación
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        
+        if ($request->has('password')) {
+            // Si se proporciona una nueva contraseña, aplicar el hash
+            $user->password = Hash::make($request['password']);
+        }
+
+        // Guardar los cambios en la base de datos
+        $user->save();
         return response()->json($user);
     }
 
-    public function destroy($id)
+    public function destroy(User $id)
     {
-        // Eliminar un usuario
-        $user = User::find($id);
-        $user->delete();
-        return response()->json(null, 204);
+        //
+        $id->delete();
+        return response()->json(['message' => 'User removed']);
+    }  
+
+    public function edit($id)
+    {
+        $user = User::find($id); // Reemplaza 'User' con el modelo de tus clientes
+        return view('users.update', ['user' => $user]);
     }
+
 }
