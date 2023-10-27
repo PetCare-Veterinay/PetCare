@@ -32,20 +32,17 @@ Route::get('/users-create', function () {
     return view('users.form');
 })->name('create');
 
-
 #TUTA PARA ENVIAR LOS DATOS Y GUARDARLOS EN LA BD
 Route::post('/users-save', function (Request $request) {
     $apiRequest = Request::create('/api/users', 'POST', $request->all());
     $response = app()->handle($apiRequest);
 })->name('save');
 
-
 #RUTA PARA ACTUALIZAR LOS DATOS 
 Route::put('/users-updated/{id}', function (Request $request, $id) {
     $apiRequest = Request::create("/api/users/{$id}", 'PUT', $request->all());
     $response = app()->handle($apiRequest);
 })->name('edit');
-
 
 #RUTA PARA CARGAR EL FORMULARIO DE EDITAR 
 Route::get('/users-update/{id}', 'App\Http\Controllers\UserController@edit')
