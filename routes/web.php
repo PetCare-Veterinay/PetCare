@@ -50,3 +50,9 @@ Route::put('/users-updated/{id}', function (Request $request, $id) {
 #RUTA PARA CARGAR EL FORMULARIO DE EDITAR 
 Route::get('/users-update/{id}', 'App\Http\Controllers\UserController@edit')
     ->name('update');
+
+
+#RUTAS PARA VER,CREAR Y ELIMINAR DATOS DEL CALENDARIO HOME
+Route::get('/getevent', 'App\Http\Controllers\FullCalendarController@getEvent')->name('getevent');
+Route::post('/createevent','App\Http\Controllers\FullCalendarController@createEvent')->name('createevent');
+Route::post('/deleteevent','App\Http\Controllers\FullCalendarController@deleteEvent')->name('deleteevent');
