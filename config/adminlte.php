@@ -335,14 +335,20 @@ return [
             
         ],
         [
-            'text' => 'Doctores',
-            'icon' => 'fas fa-fw  fa-stethoscope',
-            'url'  => '#',
+            'text' => 'Servicios',
+            'icon' => 'fas fa-fw fa-plus-circle',
+            'url' => '/servicio-list/', 
         ],
         [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-user',
             'url' => '/users-list/', 
+        ],
+
+        [
+            'text' => 'Diagnosticos',
+            'icon' => 'fas fa-fw  fa-stethoscope',
+            'url' => '/diagnostico-list/', 
         ],
  
     ],

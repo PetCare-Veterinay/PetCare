@@ -90,10 +90,7 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function edit(Diagnostico $diagnostico)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -111,7 +108,7 @@ class DiagnosticoController extends Controller
             $e->Recomendaciones = $request->Recomendaciones; 
             $e->Plan_Seguimiento = $request->Plan_Seguimiento;
             $e->Enfermedades = $request->Enfermedades;
-            $e->idTratamiento = $request->idTratamiento;
+            
             return $e->save();
         } else {
             return response()->json([
@@ -132,5 +129,10 @@ class DiagnosticoController extends Controller
         //
         $diagnostico->delete();
         return response()->json(['message' => 'Diagnostic removed']);
+    }
+    public function edit($id)
+    {
+        $diagnostico= Diagnostico::find($id);
+        return view('diagnosis.diupdate', ['diagnostico' => $diagnostico]);
     }
 }

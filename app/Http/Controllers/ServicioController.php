@@ -87,10 +87,7 @@ class ServicioController extends Controller
      * @param  \App\Models\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Servicio $servicio)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -128,5 +125,10 @@ class ServicioController extends Controller
         //
         $servicio->delete();
         return response()->json(['message' => 'Service removed']);
+    }
+    public function edit($id)
+    {
+        $servicio = Servicio::find($id); 
+        return view('service.serupdate', ['servicio' => $servicio]);
     }
 }
