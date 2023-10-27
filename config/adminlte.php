@@ -314,12 +314,12 @@ return [
         [
             'text' => 'Clientes',
             'icon' => 'fas fa-fw fa-users',
-            'url'  => '#',
+            'url'  => '/Cliente/',
         ],
         [
             'text' => 'Pacientes',
             'icon' => 'fas fa-fw fa-paw',
-            'url'  => '#',
+            'url'  => '/Pacientes/',
             
         ],
         [

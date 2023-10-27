@@ -29,12 +29,12 @@ class PacienteController extends Controller
         //
         $request->validate([
     
-            'Nombre' => 'required',
-            'Especie' => 'required',
-            'Raza'=>'required',
-            'Fecha_de_nacimineto'=>'required',
-            'Genero'=>'required',
-            'idCliente'=>'required',
+            'Nombre' => 'required|string',
+            'Especie' => 'required|string',
+            'Raza'=>'required|string',
+            'Fecha_de_nacimiento'=>'required|string',
+            'Genero'=>'required|string',
+            'idCliente'=>'required|integer',
             
         ]);
 
@@ -95,9 +95,10 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $paciente)
+    public function edit($id)
     {
-        //
+        $paciente = Paciente::find($id); // Reemplaza 'User' con el modelo de tus clientes
+        return view('Pacientes.UpPaciente', ['paciente' => $paciente]);
     }
 
     /**
@@ -115,9 +116,8 @@ class PacienteController extends Controller
             $e->Nombre = $request->Nombre;
             $e->Especie = $request->Especie;
             $e->Raza = $request->Raza; 
-            $e->Fecha_de_nacimiento = $request->Fecha_de_nacimiento;
+            $e->Fecha_de_nacimiento = $request;
             $e->Genero = $request->Genero;
-            $e->idCliente = $request->idCliente; 
             
             return $e->save();
         } else {
@@ -125,6 +125,7 @@ class PacienteController extends Controller
                 'error' => true,
                 'message' => 'No existe el paciente'
             ]);
+            
         }
     }
 

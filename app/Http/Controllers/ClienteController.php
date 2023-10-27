@@ -90,10 +90,13 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+
+     public function edit($id)
     {
-        //
+        $cliente = Cliente::find($id); // Reemplaza 'User' con el modelo de tus clientes
+        return view('Clientes.editClient', ['cliente' => $cliente]);
     }
+
 
     /**
      * Update the specified resource in storage.
