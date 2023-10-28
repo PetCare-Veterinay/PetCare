@@ -18,7 +18,7 @@ este si es el mero bueno @extends('adminlte::page')
          <div class="row justify-content-center">
            <div class="col-md-6">
                <div class="card">
-                  <div class="card-header">Editar Cliente</div>
+                  <div class="card-header">Editar Paciente</div>
                      <div class="card-body">
                      <form method="POST" action="{{ route('edit.Paciente', ['id' => $paciente->id]) }}">
 
@@ -65,7 +65,7 @@ este si es el mero bueno @extends('adminlte::page')
 
                            <!-- Agrega más campos para editar según tus necesidades -->
                            <div>
-                           <button type="submit" class="btn btn-primary mt-4 white " onclick="successfully()">Actualizar Cliente</button>
+                           <button type="submit" class="btn btn-primary mt-4 white " onclick="successfully()">Actualizar Paciente</button>
                            </div>
                            
                         </form>

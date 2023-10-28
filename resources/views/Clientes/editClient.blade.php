@@ -5,7 +5,7 @@
    <div class="box-tittle">
       <div class="color-bar"></div>
          <div class="textcontent">
-            <h1>Actualizar Usuario</h1>
+            <h1>Actualizar Cliente</h1>
          </div>
    </div>
    <br>

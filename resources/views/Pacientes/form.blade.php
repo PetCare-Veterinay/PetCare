@@ -6,7 +6,7 @@
     <div class="box-tittle">
         <div class="color-bar"></div>
         <div class="textcontent">
-            <h1>Crear Nuevo Pacientes</h1>
+            <h1>Crear Nuevo Paciente</h1>
         </div>
     </div>
     <br>
