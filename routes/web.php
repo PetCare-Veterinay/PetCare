@@ -193,7 +193,7 @@ Route::put('/NuevoPaciente/{id}', function (Request $request, $id) {
 Route::get('/PacienteEditado/{id}', 'App\Http\Controllers\PacienteController@edit')
 ->name('modi.Paciente');
 
-#-----------------------------------------------------------------------------
+    #RUTAS PRODUCTO
 Route::get('/products-list', function (){
     return view('productos.product');
 })->name('listproducto');
@@ -205,12 +205,43 @@ Route::get('/products-create', function () {
 Route::post('/products-save', function (Request $request) {
     $apiRequest = Request::create('/api/producto', 'POST', $request->all());
     $response = app()->handle($apiRequest);
+
+    // Agrega una respuesta o redirección aquí
+    return $response;
 })->name('saveproducto');
 
 Route::put('/products-updated/{id}', function (Request $request, $id) {
     $apiRequest = Request::create("/api/producto/{$id}", 'PUT', $request->all());
     $response = app()->handle($apiRequest);
-})->name('editproducto');
+})->name('editarproducto');
+
 
 Route::get('/products-update/{id}', 'App\Http\Controllers\ProductoController@edit')
-    ->name('updateproducto');
+->name('updateproducto');
+
+
+#RUTAS VENTAS
+Route::get('/ventas-list', function (){
+    return view('ventas.venta');
+})->name('listventas');
+
+Route::get('/ventas-create', function () {
+    return view('ventas.form');
+})->name('createventas');
+
+Route::post('/ventas-save', function (Request $request) {
+    $apiRequest = Request::create('/api/venta', 'POST', $request->all());
+    $response = app()->handle($apiRequest);
+
+    // Agrega una respuesta o redirección aquí
+    return $response;
+})->name('saveventas');
+
+Route::put('/ventas-updated/{id}', function (Request $request, $id) {
+    $apiRequest = Request::create("/api/venta/{$id}", 'PUT', $request->all());
+    $response = app()->handle($apiRequest);
+})->name('editarventas');
+
+
+Route::get('/ventas-update/{id}', 'App\Http\Controllers\VentasController@edit')
+->name('updateventas');

@@ -20,7 +20,7 @@
                <div class="card">
                   <div class="card-header">Editar Producto</div>
                      <div class="card-body">
-                        <form method="POST" action="{{ route('editproducto', ['id' => request('id')]) }}">
+                        <form method="POST" action="{{ route('editarproducto', ['id' => request('id')]) }}">
                            @csrf
                            @method('PUT')
 

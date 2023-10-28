@@ -1,11 +1,11 @@
 @extends('adminlte::page')
-@section('title', 'Producto')
+@section('title', 'Venta')
 @section('content')
     <br>
     <div class="box-tittle">
         <div class="color-bar"></div>
         <div class="textcontent">
-            <h1>Lista de Productos</h1>
+            <h1>Ventas Realizadas</h1>
         </div>
     </div>
     <br>
@@ -16,18 +16,17 @@
             <div class="form-group flex-grow-1 mr-2">
                 <input type="text" class="form-control" placeholder="Buscar">
             </div>
-            <a href="{{ route('createproducto') }}" id="load-create-view" class="btn btn-primary large_button"> + Agregar</a>
+            <a href="{{ route('createventas') }}" id="load-create-view" class="btn btn-primary large_button"> + Agregar</a>
         </div>
-    <div class="box">
+        <div class="box">
             <div class="box-body">
                 <table class="table table-hover custom-table">
                     <thead>
                         <tr>
                             <th scope="col">ID </th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Stock</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Total</th>
                             <th scope="Col">Acciones</th>
                         </tr>
                     </thead>
@@ -48,7 +47,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                <p>¿Estás seguro de que deseas eliminar este registro?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -61,7 +60,7 @@
 
 @section('js')
 <script>
-fetch('/api/producto')
+fetch('/api/ventas')
 .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('table tbody');
@@ -105,7 +104,7 @@ fetch('/api/producto')
                 deleteButton.textContent = 'Eliminar';
 
                 // Almacena la URL de eliminación en un atributo personalizado
-                deleteButton.setAttribute('data-delete', `api/producto/${user.id}`);
+                deleteButton.setAttribute('data-delete', `api/venta/${user.id}`);
 
                 // Agregar un evento de clic al botón "Eliminar" que abre el modal de confirmación
                 deleteButton.addEventListener('click', function () {
@@ -167,7 +166,7 @@ tableBody.appendChild(row);
         showConfirmButton: false,
     }).then(function () {
         // Realiza la redirección a tu página web
-        window.location.href = "{{ route('listproducto') }}";
+        window.location.href = "{{ route('listventas') }}";
     });
     }
 </script>
@@ -175,7 +174,7 @@ tableBody.appendChild(row);
         $(document).ready(function() {
             $("#load-create-view").click(function() {
                 // Realizar una petición AJAX para cargar la vista de creación
-                $.get("{{ route('createproducto') }}", function(data) {
+                $.get("{{ route('createventas') }}", function(data) {
                     // Insertar la vista de creación en el contenedor
                     $("#create-view-container").html(data);
                 });
@@ -186,7 +185,7 @@ tableBody.appendChild(row);
         $(document).ready(function() {
             $("#load-update-view").click(function() {
                 // Realizar una petición AJAX para cargar la vista de creación
-                $.get("{{ route('createproducto') }}", function(data) {
+                $.get("{{ route('createventas') }}", function(data) {
                     // Insertar la vista de creación en el contenedor
                     $("#update-view-container").html(data);
                 });
