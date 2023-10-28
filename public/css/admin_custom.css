@@ -88,3 +88,9 @@
    font-size: 32px; 
    font-family: 'Roboto';
 }
+
+.containerr {
+   padding: 15px;
+   border: 2px solid #e1e6e6;
+   border-radius: 10px;
+}

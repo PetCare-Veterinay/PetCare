@@ -325,13 +325,13 @@ return [
         [
             'text' => 'Citas',
             'icon' => 'fas fa-fw fa-calendar',
-            'url'  => '#',
+            'url'  => '/getevent/',
             
         ],
         [
             'text' => 'Ventas',
             'icon' => 'fas fa-fw  fa-cart-plus',
-            'url'  => '#',
+            'url'  => '/ventas-list/',
             
         ],
         [

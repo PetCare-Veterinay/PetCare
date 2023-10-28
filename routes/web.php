@@ -49,6 +49,7 @@ Route::get('/users-update/{id}', 'App\Http\Controllers\UserController@edit')
     ->name('update');
 
 
+
 #RUTAS PARA VER,CREAR Y ELIMINAR DATOS DEL CALENDARIO HOME
 Route::get('/getevent', 'App\Http\Controllers\FullCalendarController@getEvent')->name('getevent');
 Route::post('/createevent','App\Http\Controllers\FullCalendarController@createEvent')->name('createevent');
@@ -83,6 +84,8 @@ Route::put('/servicio-updated/{id}', function (Request $request, $id) {
 Route::get('/2servicio/{id}', 'App\Http\Controllers\ServicioController@edit')
     ->name('Cambiar');
 
+
+
 //------RUTAS DE DIAGNOSTICO-----
 //Listar
 Route::get('/diagnostico-list', function () {
@@ -112,25 +115,13 @@ Route::get('/1diagnostico/{id}', 'App\Http\Controllers\DiagnosticoController@edi
 
 
 
-
-
-
 //CLIENTE
 //LISTAR
 Route::get('/Cliente', function () {
     return view('Clientes.clientes');
 })->name('Cliente');
 
-
-
-
-
-
-
-
-
 //GUARDAR
-
 Route::get('/CrearCliente', function () {
     return view('Clientes.form');
 })->name('Client');
@@ -140,9 +131,6 @@ Route::post('/NuevoCliente', function (Request $request) {
     $response = app()->handle($apiRequest);
 })->name('vistaCliente');
 
-
-
-//EDITAR
 //RUTA PARA ACTUALIZAR
 Route::put('/NewCliente/{id}', function (Request $request, $id) {
     $apiRequest = Request::create("/api/cliente/{$id}", 'PUT', $request->all());
@@ -150,13 +138,9 @@ Route::put('/NewCliente/{id}', function (Request $request, $id) {
     return $response; // Devuelve la respuesta a la solicitud original
 })->name('editando');
 
-
 #RUTA PARA CARGAR EL FORMULARIO DE EDITAR 
 Route::get('/EditarCliente/{id}', 'App\Http\Controllers\ClienteController@edit')
     ->name('modificado');
-
-
-
 
 
 
@@ -165,8 +149,6 @@ Route::get('/EditarCliente/{id}', 'App\Http\Controllers\ClienteController@edit')
 Route::get('/Pacientes', function () {
     return view('Pacientes.Gpaciente');
 })->name('Paciente.General');
-
-
 
 //GUARDAR
 Route::get('/CreatePacientes', function () {
@@ -177,23 +159,21 @@ Route::post('/NuevoPaciente', function (Request $request) {
     $apiRequest = Request::create('/api/paciente', 'POST', $request->all());
     $response = app()->handle($apiRequest);
 })->name('pacienteCreado');
-                    
-                    
-                    
-//EDITAR
+                                                        
 //RUTA PARA ACTUALIZAR
 Route::put('/NuevoPaciente/{id}', function (Request $request, $id) {
     $apiRequest = Request::create("/api/paciente/{$id}", 'PUT', $request->all());
     $response = app()->handle($apiRequest);
     return $response; // Devuelve la respuesta a la solicitud original
 })->name('edit.Paciente');
-                                   
-                    
+                                              
 #RUTA PARA CARGAR EL FORMULARIO DE EDITAR 
 Route::get('/PacienteEditado/{id}', 'App\Http\Controllers\PacienteController@edit')
 ->name('modi.Paciente');
 
-    #RUTAS PRODUCTO
+
+
+#RUTAS PRODUCTO
 Route::get('/products-list', function (){
     return view('productos.product');
 })->name('listproducto');
@@ -205,8 +185,6 @@ Route::get('/products-create', function () {
 Route::post('/products-save', function (Request $request) {
     $apiRequest = Request::create('/api/producto', 'POST', $request->all());
     $response = app()->handle($apiRequest);
-
-    // Agrega una respuesta o redirección aquí
     return $response;
 })->name('saveproducto');
 
@@ -215,9 +193,9 @@ Route::put('/products-updated/{id}', function (Request $request, $id) {
     $response = app()->handle($apiRequest);
 })->name('editarproducto');
 
-
 Route::get('/products-update/{id}', 'App\Http\Controllers\ProductoController@edit')
 ->name('updateproducto');
+
 
 
 #RUTAS VENTAS
@@ -232,8 +210,6 @@ Route::get('/ventas-create', function () {
 Route::post('/ventas-save', function (Request $request) {
     $apiRequest = Request::create('/api/venta', 'POST', $request->all());
     $response = app()->handle($apiRequest);
-
-    // Agrega una respuesta o redirección aquí
     return $response;
 })->name('saveventas');
 
@@ -241,7 +217,6 @@ Route::put('/ventas-updated/{id}', function (Request $request, $id) {
     $apiRequest = Request::create("/api/venta/{$id}", 'PUT', $request->all());
     $response = app()->handle($apiRequest);
 })->name('editarventas');
-
 
 Route::get('/ventas-update/{id}', 'App\Http\Controllers\VentasController@edit')
 ->name('updateventas');
