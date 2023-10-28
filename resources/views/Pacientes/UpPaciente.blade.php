@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+este si es el mero bueno @extends('adminlte::page')
 @section('title', 'Update')
 @section('content')
    <br>
@@ -40,20 +40,34 @@
 
                            <div class="form-group">
                               <label for="Fecha_de_nacimiento">Fecha_de_nacimiento</label>
-                              <input type="Fecha_de_nacimiento" name="email" id="Fecha_de_nacimiento" class="form-control" value="{{ $paciente->Fecha_de_nacimiento }}">
+                              <input type="date" name="Fecha_de_nacimiento" id="Fecha_de_nacimiento" class="form-control" value="{{ $paciente->Fecha_de_nacimiento }}">
                            </div>
                            <div class="form-group">
                               <label for="Genero">Genero</label>
                               <input type="text" name="Genero" id="Genero" class="form-control" value="{{ $paciente->Genero }}">
                            </div>
-                           <div class="form-group">
-                              <label for="id_Cliente">id_Cliente</label>
-                              <input type="text" name="id_Cliente" id="id_Cliente" class="form-control" value="{{ $paciente->id_Cliente }}">
-                           </div>
+                           <select name="idCliente" class="form-control">
+                              <div class="dropdown">
+                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Clientes
+                                 </button>
+                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @foreach($clientes as $client) 
+                                    <option value="{{$client->id}}">
+                                       {{$client->id}} - {{ $client->Nombre}}
+                                    </option>
+                                    @endforeach
+                                 </div>
+                              </div>
+                           </select>
+
+
 
                            <!-- Agrega más campos para editar según tus necesidades -->
-
-                           <button type="submit" class="btn btn-primary" onclick="successfully()">Actualizar Cliente</button>
+                           <div>
+                           <button type="submit" class="btn btn-primary mt-4 white " onclick="successfully()">Actualizar Cliente</button>
+                           </div>
+                           
                         </form>
                      </div>
                   </div>
@@ -93,4 +107,3 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;0,700;1,400;1,500&family=Roboto+Condensed:wght@300;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
 @stop
-

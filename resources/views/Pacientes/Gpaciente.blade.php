@@ -3,14 +3,15 @@
 @section('title', 'Pacientes')
 
 @section('content')
-    <br>
+
+<br>
     <div class="box-tittle">
         <div class="color-bar"></div>
             <div class="textcontent">
                 <h1>Pacientes</h1>
             </div>
-        </div>
-    <br>
+    </div>
+<br>
     
     <div class="content" style="background-color: #fff; border: 2px solid #fff; padding: 35px;">
     <!-- Buscador y Botón de Agregar -->

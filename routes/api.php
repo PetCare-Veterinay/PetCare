@@ -42,6 +42,7 @@ Route::put('/paciente/{paciente}', 'App\Http\Controllers\PacienteController@upda
 Route::post('/paciente', 'App\Http\Controllers\PacienteController@store'); // Crear
 Route::delete('/paciente/{paciente}', 'App\Http\Controllers\PacienteController@destroy');// eliminar
 
+
 //TRATAMIENTO
 Route::get('/tratamiento', 'App\Http\Controllers\TratamientoController@index');
 Route::get('/tratamiento/{id}', 'App\Http\Controllers\TratamientoController@show');//consultar
@@ -57,6 +58,7 @@ Route::get('/cliente/{id}', 'App\Http\Controllers\ClienteController@show');
 Route::put('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@update');
 Route::post('/cliente', 'App\Http\Controllers\ClienteController@store');
 Route::delete('/cliente/{cliente}', 'App\Http\Controllers\ClienteController@destroy');
+
 
 
 

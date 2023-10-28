@@ -83,7 +83,6 @@
                                         @enderror
                                     </div>
                                     <button type="button" id="registerPaciente" class="btn btn-primary" onclick="successfully()">Registrar</button>
-
                                    
                                 </form>
                             </div>

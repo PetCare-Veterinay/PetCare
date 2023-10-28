@@ -9,7 +9,7 @@ class Paciente extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Nombre', 'Especie', 'Raza', 'Fecha_de_Nacimiento', 'Genero', 'idCliente'];
+    protected $fillable = ['Nombre', 'Especie', 'Raza', 'Fecha_de_nacimiento', 'Genero', 'idCliente'];
 
     public function cita(): HasMany
     {

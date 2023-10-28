@@ -12,11 +12,27 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $client = Cliente::all();
-        return response()->json($client);
+    public function index(Request $request)
+{
+    $query = $request->input('query');
+
+    if ($query) {
+        $clientes = Cliente::where('Nombre', 'like', "%$query%")->get();
+    } else {
+        $clientes = Cliente::all();
     }
+
+    return response()->json($clientes);
+}
+
+
+    public function getClients() {
+
+        $clients = Cliente::all();
+      
+        return view('clients.dropdown', compact('clients'));
+      
+      }
 
     /**
      * Show the form for creating a new resource.

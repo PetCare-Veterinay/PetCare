@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class PacienteController extends Controller
 {
@@ -98,7 +99,9 @@ class PacienteController extends Controller
     public function edit($id)
     {
         $paciente = Paciente::find($id); // Reemplaza 'User' con el modelo de tus clientes
-        return view('Pacientes.UpPaciente', ['paciente' => $paciente]);
+        $clientes = Cliente::all(); // Obtén la lista de todos los clientes
+        
+        return view('Pacientes.UpPaciente', compact('paciente', 'clientes'));
     }
 
     /**
@@ -109,25 +112,29 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-
     {
         $e = Paciente::find($id);
         if (isset($e)) {
             $e->Nombre = $request->Nombre;
             $e->Especie = $request->Especie;
             $e->Raza = $request->Raza; 
-            $e->Fecha_de_nacimiento = $request;
+            $e->Fecha_de_nacimiento = $request->Fecha_de_nacimiento; // Corregir esta línea
             $e->Genero = $request->Genero;
-            
-            return $e->save();
+            $e->idCliente = $request->idCliente;
+        
+            $e->save();
+        
+            return response()->json([
+                'message' => 'Paciente actualizado correctamente'
+            ]);
         } else {
             return response()->json([
                 'error' => true,
                 'message' => 'No existe el paciente'
             ]);
-            
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

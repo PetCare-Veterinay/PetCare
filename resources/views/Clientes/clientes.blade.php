@@ -15,9 +15,11 @@
     <div class="content" style="background-color: #fff; border: 2px solid #fff; padding: 35px;">
     <!-- Buscador y Botón de Agregar -->
     <div class="d-flex justify-content-between mb-3">
-        <div class="form-group flex-grow-1 mr-2">
-            <input type="text" class="form-control" placeholder="Buscar">
-        </div>
+    <div class="form-group flex-grow-1 mr-2">
+    <input type="text" class="form-control" placeholder="Buscar" id="searchInput">
+</div>
+<button type="button" id="searchButton">Buscar</button>
+
         <a href="{{ route('Client') }}" id="load-create-view" class="btn btn-primary large_button"> + Agregar</a>
     </div>
     
@@ -64,9 +66,123 @@
 
 
 @stop
-
 @section('js')
 <script>
+    document.getElementById("searchButton").addEventListener("click", function() {
+        // Obtén el valor del campo de búsqueda
+        var searchTerm = document.getElementById("searchInput").value;
+
+        // Realiza la búsqueda en función del término ingresado (searchTerm)
+        fetch('/api/cliente')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('table tbody');
+                tableBody.innerHTML = ''; // Borra los resultados anteriores
+
+                data.forEach(user => {
+                    if (
+                        user.Nombre.includes(searchTerm) ||
+                        user.Apellido.includes(searchTerm) ||
+                        user.Telefono.includes(searchTerm) ||
+                        user.email.includes(searchTerm) ||
+                        user.Direccion.includes(searchTerm)
+                    ) {
+                        const row = document.createElement('tr');
+
+                        // Crear celdas para ID, Nombre, Apellido, Teléfono, Email y Dirección
+                        const idCell = document.createElement('td');
+                        idCell.textContent = user.id;
+
+                        const NombreCell = document.createElement('td');
+                        NombreCell.textContent = user.Nombre;
+
+                        const ApellidoCell = document.createElement('td');
+                        ApellidoCell.textContent = user.Apellido;
+
+                        const TelefonoCell = document.createElement('td');
+                        TelefonoCell.textContent = user.Telefono;
+
+                        const EmailCell = document.createElement('td');
+                        EmailCell.textContent = user.email;
+
+                        const DireccionCell = document.createElement('td');
+                        DireccionCell.textContent = user.Direccion;
+
+                        // Crear celda para los botones de "Editar" y "Eliminar"
+                        const actionsCell = document.createElement('td');
+
+                        const editButton = document.createElement('button');
+                        editButton.className = 'btn btn-info';
+                        editButton.textContent = 'Editar';
+
+                        // Agregar manejador de clic para redireccionar
+                        editButton.addEventListener('click', () => {
+                            const id = user.id;
+                            window.location.href = `/EditarCliente/${user.id}`;
+                        });
+
+                        actionsCell.appendChild(editButton);
+                        const space = document.createTextNode(' ');
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.className = 'btn btn-danger';
+                        deleteButton.textContent = 'Eliminar';
+
+                        // Almacena la URL de eliminación en un atributo personalizado
+                        deleteButton.setAttribute('data-delete', `api/cliente/${user.id}`);
+
+                        // Agregar un evento de clic al botón "Eliminar" que abre el modal de confirmación
+                        deleteButton.addEventListener('click', function () {
+                            // Almacenar la URL de eliminación en una variable
+                            const deleteUrl = deleteButton.getAttribute('data-delete');
+
+                            $('#deleteModal').modal('show');
+
+                            // Agregar un evento de clic al botón de confirmación dentro del modal
+                            document.getElementById('confirmDelete').addEventListener('click', function () {
+                                // Realiza una solicitud DELETE a la URL de eliminación
+                                fetch(deleteUrl, {
+                                    method: 'delete',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                })
+
+                                .then(response => response.json())
+                                .then(data => {
+
+                                    console.log(data.message);
+                                })
+                                .catch(error => {
+                                    console.error('Error al eliminar el cliente:', error);
+                                });
+
+                                // Cierra el modal de confirmación
+                                $('#deleteModal').modal('hide');
+                            });
+                        });
+
+                        actionsCell.appendChild(editButton);
+                        actionsCell.appendChild(space);
+                        actionsCell.appendChild(deleteButton);
+
+                        // Agregar las celdas a la fila de la tabla
+                        row.appendChild(idCell);
+                        row.appendChild(NombreCell);
+                        row.appendChild(ApellidoCell);
+                        row.appendChild(TelefonoCell);
+                        row.appendChild(EmailCell);
+                        row.appendChild(DireccionCell);
+                        row.appendChild(actionsCell);
+
+                        // Agregar la fila a la tabla
+                        tableBody.appendChild(row);
+                    }
+                });
+            });
+    });
+
+    // Código para cargar todos los registros al cargar la página
     fetch('/api/cliente')
         .then(response => response.json())
         .then(data => {
@@ -83,13 +199,13 @@
                 NombreCell.textContent = user.Nombre;
 
                 const ApellidoCell = document.createElement('td');
-                ApellidoCell.textContent = user.Apellido; 
+                ApellidoCell.textContent = user.Apellido;
 
                 const TelefonoCell = document.createElement('td');
-                TelefonoCell.textContent = user.Telefono; 
+                TelefonoCell.textContent = user.Telefono;
 
                 const EmailCell = document.createElement('td');
-                EmailCell.textContent = user.email; 
+                EmailCell.textContent = user.email;
 
                 const DireccionCell = document.createElement('td');
                 DireccionCell.textContent = user.Direccion;
@@ -104,21 +220,21 @@
                 // Agregar manejador de clic para redireccionar
                 editButton.addEventListener('click', () => {
                     const id = user.id;
-                    window.location.href = `/EditarCliente/${user.id}`; 
-                    });
-                    
-                    actionsCell.appendChild(editButton);
-                    const space = document.createTextNode('  ');
+                    window.location.href = `/EditarCliente/${user.id}`;
+                });
 
-                    const deleteButton = document.createElement('button');
-                    deleteButton.className = 'btn btn-danger';
-                    deleteButton.textContent = 'Eliminar';
+                actionsCell.appendChild(editButton);
+                const space = document.createTextNode(' ');
 
-                    // Almacena la URL de eliminación en un atributo personalizado
-                    deleteButton.setAttribute('data-delete', `api/cliente/${user.id}`);
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-danger';
+                deleteButton.textContent = 'Eliminar';
 
-                    // Agregar un evento de clic al botón "Eliminar" que abre el modal de confirmación
-                    deleteButton.addEventListener('click', function () {
+                // Almacena la URL de eliminación en un atributo personalizado
+                deleteButton.setAttribute('data-delete', `api/cliente/${user.id}`);
+
+                // Agregar un evento de clic al botón "Eliminar" que abre el modal de confirmación
+                deleteButton.addEventListener('click', function () {
                     // Almacenar la URL de eliminación en una variable
                     const deleteUrl = deleteButton.getAttribute('data-delete');
 
@@ -126,46 +242,45 @@
 
                     // Agregar un evento de clic al botón de confirmación dentro del modal
                     document.getElementById('confirmDelete').addEventListener('click', function () {
-                    // Realiza una solicitud DELETE a la URL de eliminación
-                    fetch(deleteUrl, {
-                    method: 'delete',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                
-                .then(response => response.json())
-                .then(data => {
-               
-                    console.log(data.message); 
-                })
-                .catch(error => {
-                    console.error('Error al eliminar el cliente:', error);
+                        // Realiza una solicitud DELETE a la URL de eliminación
+                        fetch(deleteUrl, {
+                            method: 'delete',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        })
+
+                        .then(response => response.json())
+                        .then(data => {
+
+                            console.log(data.message);
+                        })
+                        .catch(error => {
+                            console.error('Error al eliminar el cliente:', error);
+                        });
+
+                        // Cierra el modal de confirmación
+                        $('#deleteModal').modal('hide');
+                    });
                 });
 
-            // Cierra el modal de confirmación
-            $('#deleteModal').modal('hide');
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(space);
+                actionsCell.appendChild(deleteButton);
+
+                // Agregar las celdas a la fila de la tabla
+                row.appendChild(idCell);
+                row.appendChild(NombreCell);
+                row.appendChild(ApellidoCell);
+                row.appendChild(TelefonoCell);
+                row.appendChild(EmailCell);
+                row.appendChild(DireccionCell);
+                row.appendChild(actionsCell);
+
+                // Agregar la fila a la tabla
+                tableBody.appendChild(row);
+            });
         });
-    });
-    
-    actionsCell.appendChild(editButton);
-    actionsCell.appendChild(space);
-    actionsCell.appendChild(deleteButton);
-
-    // Agregar las celdas a la fila de la tabla
-    row.appendChild(idCell);
-    row.appendChild(NombreCell);
-    row.appendChild(ApellidoCell);
-    row.appendChild(TelefonoCell);
-    row.appendChild(EmailCell);
-    row.appendChild(DireccionCell);
-    row.appendChild(actionsCell);
-
-    // Agregar la fila a la tabla
-    tableBody.appendChild(row);
-    });
-});
-
 </script>
 
 <script src="https://unpkg.com/sweetalert2@10"></script>
