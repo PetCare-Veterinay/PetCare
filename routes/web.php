@@ -193,4 +193,24 @@ Route::put('/NuevoPaciente/{id}', function (Request $request, $id) {
 Route::get('/PacienteEditado/{id}', 'App\Http\Controllers\PacienteController@edit')
 ->name('modi.Paciente');
 
+#-----------------------------------------------------------------------------
+Route::get('/products-list', function (){
+    return view('productos.product');
+})->name('listproducto');
 
+Route::get('/products-create', function () {
+    return view('productos.form');
+})->name('createproducto');
+
+Route::post('/products-save', function (Request $request) {
+    $apiRequest = Request::create('/api/producto', 'POST', $request->all());
+    $response = app()->handle($apiRequest);
+})->name('saveproducto');
+
+Route::put('/products-updated/{id}', function (Request $request, $id) {
+    $apiRequest = Request::create("/api/producto/{$id}", 'PUT', $request->all());
+    $response = app()->handle($apiRequest);
+})->name('editproducto');
+
+Route::get('/products-update/{id}', 'App\Http\Controllers\ProductoController@edit')
+    ->name('updateproducto');

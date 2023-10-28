@@ -61,7 +61,7 @@ class ProductoController extends Controller
     {
         //
         $inputs = $request  ->input();
-        $respuesta= producto::create($inputs);
+        $respuesta= Producto::create($inputs);
         return $respuesta;
     }
     
@@ -73,7 +73,7 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $producto = producto::find($id);
+        $producto = Producto::find($id);
         if (isset($producto)) {
             return response()->json([
                 'data' => $producto,
@@ -88,10 +88,6 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -102,7 +98,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        $producto = producto::find($id);
+        $producto = Producto::find($id);
         if (isset($producto)) {
             $producto->nombre = $request->input('Nombre');
             $producto->descripcion = $request->input('Descripcion');
@@ -129,7 +125,7 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        $producto = producto::find($id);
+        $producto = Producto::find($id);
         if (isset($producto)) {
             $producto->delete();
             return response()->json([
@@ -142,5 +138,10 @@ class ProductoController extends Controller
                 'message' => 'Producto no encotrado',
             ]);
         }
+    }
+    public function edits($id)
+    {
+        $product = Product::find($id); // Reemplaza 'User' con el modelo de tus clientes
+        return view('productos.update', ['product' => $product]);
     }
 }

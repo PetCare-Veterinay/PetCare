@@ -339,6 +339,13 @@ return [
             'icon' => 'fas fa-fw fa-plus-circle',
             'url' => '/servicio-list/', 
         ],
+
+        [
+            'text' => 'Productos',
+            'icon' => 'fas fa-fw fa-tag',
+            'url' => '/products-list/', 
+        ],
+
         [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-user',
