@@ -73,13 +73,12 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
+        //
         $producto = Producto::find($id);
-        if (isset($producto)) {
-            return response()->json([
-                'data' => $producto,
-                'message' => 'Producto encotrado',
-            ]);
+        if (!$producto) {
+            return response()->json(['message' => 'product not found']);
         }
+        return response()->json($producto);
     }
 
     /**
@@ -98,21 +97,18 @@ class ProductoController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        $producto = Producto::find($id);
-        if (isset($producto)) {
-            $producto->nombre = $request->input('Nombre');
-            $producto->descripcion = $request->input('Descripcion');
-            $producto->precio = $request->input('Precio');
-            $producto->stock = $request->input('Stock');
-            $producto->save();
-            return response()->json([
-                'message' => 'Producto Actualizado Correctamente',
-                'producto' => $producto,
-            ]);
+        $e = Producto::find($id);
+        if (isset($e)) {
+            $e->Nombre = $request->Nombre;
+            $e->Descripcion = $request->Descripcion;
+            $e->Precio = $request->Precio;
+            $e->Stock = $request->Stock; 
+            
+            return $e->save();
         } else {
             return response()->json([
                 'error' => true,
-                'message' => 'Detalle de venta no encontrado',
+                'message' => 'No existe el Producto'
             ]);
         }
     }
@@ -125,23 +121,13 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        $producto = Producto::find($id);
-        if (isset($producto)) {
-            $producto->delete();
-            return response()->json([
-                'data' => $producto,
-                'message' => 'Producto eliminado',
-            ]);
-        } else {
-            return response()->json([
-                'error' => true,
-                'message' => 'Producto no encotrado',
-            ]);
-        }
+        //
+        $servicio->delete();
+        return response()->json(['message' => 'Product removed']);
     }
-    public function edits($id)
+    public function edit($id)
     {
-        $product = Product::find($id); // Reemplaza 'User' con el modelo de tus clientes
-        return view('productos.update', ['product' => $product]);
+        $producto = Producto::find($id); // Reemplaza 'User' con el modelo de tus clientes
+        return view('productos.update', ['producto' => $producto]);
     }
 }

@@ -26,22 +26,22 @@
 
                            <div class="form-group">
                               <label for="name">Nombre</label>
-                              <input type="text" name="Nombre" id="Nombre" class="form-control" value="{{ $product->Nombre }}">
+                              <input type="text" name="Nombre" id="Nombre" class="form-control" value="{{ $producto->Nombre }}">
                            </div>
 
                            <div class="form-group">
                               <label for="name">Descripción</label>
-                              <input type="text" name="Descripcion" id="Descripcion" class="form-control" value="{{ $product->Descripcion }}">
+                              <input type="text" name="Descripcion" id="Descripcion" class="form-control" value="{{ $producto->Descripcion }}">
                            </div>
 
                            <div class="form-group">
                               <label for="name">Precio</label>
-                              <input type="text" name="Precio" id="Precio" class="form-control" value="{{ $product->Precio }}">
+                              <input type="text" name="Precio" id="Precio" class="form-control" value="{{ $producto->Precio }}">
                            </div>
 
                            <div class="form-group">
                               <label for="name">Stock</label>
-                              <input type="text" name="Stock" id="Stock" class="form-control" value="{{ $product->Stock }}">
+                              <input type="text" name="Stock" id="Stock" class="form-control" value="{{ $producto->Stock }}">
                            </div>
 
                            <!-- Agrega más campos para editar según tus necesidades -->
