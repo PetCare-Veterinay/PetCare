@@ -304,7 +304,7 @@ return [
         // Sidebar items:
 
 
-        ['header' => 'Configuraciones'],
+        ['header' => ''],
         [
             'text' => 'Home',
             'icon' => 'fas fa-fw fa-home',
@@ -512,5 +512,5 @@ return [
     |
     */
 
-    'livewire' => true,
+    'livewire' => false,
 ];

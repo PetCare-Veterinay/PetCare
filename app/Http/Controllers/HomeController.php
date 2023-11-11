@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cliente;
+use App\Models\User;
+use App\Models\Paciente;
+use App\Models\Event;
+use App\Models\Ventas;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $citasDelDia = Event::count();
+        $ventasDelDia = Ventas::count();
+        $ventasDelMes = Ventas::count();
+        $doctores = User::count();
+        $clientes = Cliente::count();
+        $pacientes = Paciente::count();
+
+        return view('home', compact('citasDelDia', 'ventasDelDia', 'ventasDelMes', 'doctores', 'clientes', 'pacientes'));
+        
     }
 }

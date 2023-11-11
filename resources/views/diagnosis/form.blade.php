@@ -83,15 +83,6 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="">idTratamiento</label>
-                                        <input id="idTratamiento" type="text" class="form-control @error('idTratamiento') is-invalid @enderror" name="idTratamiento" value="{{ old('idTratamiento') }}" required autocomplete="idTratamiento" autofocus>
-                                        @error('idTratamiento')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
                                     <button type="button" id="registerDiagnosis" class="btn btn-primary" onclick="successfully()">Registrar</button>
 
                                    

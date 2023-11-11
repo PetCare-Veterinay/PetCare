@@ -22,7 +22,7 @@
                         <div class="box-header with-border">
                             <div class="box-content">
                                 <div class="text-content">
-                                    <span class="number">5</span>
+                                    <span class="number">{{ $citasDelDia }}</span>
                                     <h3 class="box-title">Citas del día</h3>
                                 </div>
                                 <div class="icon">
@@ -38,7 +38,7 @@
                         <div class="box-header with-border">
                             <div class="box-content">
                                 <div class="text-content">
-                                    <span class="number">Q. </span>
+                                    <span class="number">Q. {{ $ventasDelDia }} </span>
                                     <h3 class="box-title">Ventas del día</h3>
                                 </div>
                                 <div class="icon">
@@ -54,7 +54,7 @@
                         <div class="box-header with-border">
                             <div class="box-content">
                                 <div class="text-content">
-                                    <span class="number">Q. </span>
+                                    <span class="number">Q. {{ $ventasDelMes }} </span>
                                     <h3 class="box-title">Ventas del Mes</h3>
                                 </div>
                                 <div class="icon">
@@ -74,7 +74,7 @@
                         <div class="box-header with-border">
                             <div class="box-content">
                                 <div class="text-content">
-                                    <span class="number">4</span>
+                                    <span class="number">{{ $doctores }}</span>
                                     <h3 class="box-title">Doctores</h3>
                                 </div>
                                 <div class="icon">
@@ -90,7 +90,7 @@
                         <div class="box-header with-border">
                             <div class="box-content">
                                 <div class="text-content">
-                                    <span class="number">17</span>
+                                    <span class="number">{{ $clientes }}</span>
                                     <h3 class="box-title">Clientes</h3>
                                 </div>
                                 <div class="icon">
@@ -106,7 +106,7 @@
                         <div class="box-header with-border">
                             <div class="box-content">
                                 <div class="text-content">
-                                    <span class="number">25</span>
+                                    <span class="number">{{ $pacientes }}</span>
                                     <h3 class="box-title">Pacientes</h3>
                                 </div>
                                 <div class="icon">
